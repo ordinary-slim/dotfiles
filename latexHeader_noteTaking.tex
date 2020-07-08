@@ -1,0 +1,54 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{amsmath, amssymb}
+\usepackage[many]{tcolorbox}
+\usepackage{hyperref} % make references clickable
+
+\tcbuselibrary{theorems, breakable}
+% the one whose name must not be spoken
+\usepackage{tikz}
+% fancy enumerates
+\usepackage{enumitem}
+\usepackage{pifont} %check symbols used in environment todolist
+% set margins
+\usepackage[top=0.75in, bottom=0.75in, left=1in, right=1in]{geometry}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% proof environment
+\newenvironment{myproof}{\textsc{Proof}\hspace{0.5cm}}{~\hfill$\blacksquare$\\[1mm]\noindent}
+\newenvironment{mypseudoproof}{\textsc{Pseudo-Proof}\hspace{0.5cm}}{~\hfill\tikzgraysquare\\[1mm]\noindent}
+% theorem environment
+\newtcbtheorem[number within=section]{mythm}{Theorem}{breakable, enhanced, colback=Cerulean!40,colframe=MidnightBlue,fonttitle=\bfseries}{thm}
+% proposition environment
+\newtcbtheorem[number within=section]{myprop}{Proposition}{breakable, enhanced}{prop}
+% definition environment
+\newtcbtheorem[number within=section]{mydef}{Definition}{breakable, enhanced, colback=SpringGreen!40,colframe=OliveGreen,fonttitle=\bfseries}{def}
+% example environment
+\newcounter{example}[section]
+\counterwithin{example}{section}
+\newenvironment{myeg}[1]{\refstepcounter{example}\par\medskip\textbf{Example~\theexample. #1}\hspace{0.25cm} \rmfamily}{\medskip}
+% corollary environment
+\newenvironment{mycorollary}[1]{\par\medskip\textbf{COROLLARY . #1}\hspace{0.25cm} \rmfamily}{\medskip}
+% statement environment
+\newcounter{statement}[section]
+\counterwithin{statement}{section}
+\newenvironment{mystatement}[0]{\refstepcounter{statement}\par \noindent \textsc{Statement \thestatement. \enspace}}{\\[1mm]}
+% remark environment
+\newcounter{remark}[section]
+\newenvironment{myremark}[0]{\refstepcounter{remark}\par \noindent \textbf{REMARK \enspace}}{\\[1mm]}
+% checklist environment
+\newlist{todolist}{itemize}{2}
+\setlist[todolist]{label=$\square$}
+\newcommand{\cmark}{\ding{51}}
+\newcommand{\xmark}{\ding{55}}
+\newcommand{\done}{\rlap{$\square$}{\raisebox{2pt}{\large\hspace{1pt}\cmark}}
+\hspace{-2.5pt}}
+\newcommand{\wontfix}{\rlap{$\square$}{\large\hspace{1pt}\xmark}}
+
+% my commands
+\renewcommand{\tilde}[0]{{\raise.17ex\hbox{$\scriptstyle\mathtt{\sim}$}}}
+\newcommand{\tikzcircle}{\tikz\draw[black, fill=black](0,0) circle (0.5ex);}
+\newcommand{\tikzgraysquare}{\tikz \fill[fill=gray!60] (-0.13cm, -0.13cm) -- (-0.13cm, 0.13cm) -- (0.13cm, 0.13cm) -- (0.13cm, -0.13cm) -- cycle;}
+\newcommand{\simplies}{\DOTSB\Longrightarrow}
+\let\emptyset\varnothing

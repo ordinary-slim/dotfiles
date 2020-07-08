@@ -1,4 +1,4 @@
-" Plugins. Plugin manager is vim-plug
+" Plugs. Plug manager is vim-plug
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 " let $HOME = $VIM
 let g:vim_plug_path = $HOME.'/.vim/autoload/plug.vim'
@@ -12,6 +12,11 @@ endif
 exec 'source '.g:vim_plug_path
 
 call plug#begin('~/.vim/plugged')
+" Utility
+Plug 'MarcWeber/vim-addon-mw-utils' "required by snipmate
+Plug 'tomtom/tlib_vim' "required by snipmate
+Plug 'garbas/vim-snipmate' "snippets
+Plug 'skywind3000/asyncrun.vim' "job_start made easier
 " Aspect
 Plug 'morhetz/gruvbox' " gruvbox colorscheme
 " Miscellaneous
@@ -41,3 +46,18 @@ nnoremap <Leader>c :close<cr>
 nnoremap <Leader>q :quit<cr>
 nnoremap <cr> :call append(line("."), "")<cr>
 inoremap <c-e> <c-o>$
+
+if executable('pdflatex') "TO DO : Make it unix compatible
+	let g:discrete_latex_path = '' "discrete_latex runs pdflatex w/o interaction and returns error level
+	if has('win32')
+		let g:discrete_latex_path = $HOME."/.vim/discrete_latex.bat"
+	endif
+	function! CompileLatex()
+		write
+		exec 'AsyncRun '.g:discrete_latex_path.' '.@%
+		copen 6
+		wincmd w
+	endfunction
+	nnoremap <C-Enter> :call CompileLatex() <cr>
+	nnoremap <F11> :exec 'split '.expand('%:t:r').'.log'<cr> /!<cr>
+endif
