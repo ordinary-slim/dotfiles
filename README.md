@@ -1,3 +1,3 @@
-Launch the following commands:
+Download a configuration file _.foo_ with __curl__:
 
-curl -fLo __destination : path in the new machine__ --create dirs https://raw.githubusercontent.com/ordinary-slim/__dotfile__
+curl -fLo /\*_destination path in new machine_\*/ --create dirs https://raw.githubusercontent.com/ordinary-slim/.foo
