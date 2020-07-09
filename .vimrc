@@ -41,7 +41,7 @@ endif
 
 set guifont=Consolas:h11
 
-silent! colorscheme Gruvbox
+silent! colorscheme gruvbox | set background =dark "Setting dark mode
 
 syntax enable
 let &laststatus = 2 "always show status line
