@@ -4,28 +4,39 @@
 let g:vim_plug_path = $HOME.'/.vim/autoload/plug.vim'
 let &rtp .= g:vim_plug_path
 
+let g:vim_plug_installed = 1
 " if vim-plug is not installed, install vim-plug
 if empty(glob(g:vim_plug_path))
-	silent exec '!curl -fLo '.g:vim_plug_path.' --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+	if executable('curl')
+		silent exec '!curl -fLo '.g:vim_plug_path.' --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+		autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+	elseif executable('wget')
+		silent exec '!wget "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" -P '.fnamemodify(g:vim_plug_path, ":h")
+		autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+	else
+		echo '! Could not install the plugin manager :('
+		let g:vim_plug_installed = 0
+	endif
 endif
-exec 'source '.g:vim_plug_path
+if g:vim_plug_installed
+	exec 'source '.g:vim_plug_path
 
-call plug#begin('~/.vim/plugged')
-" Utility
-Plug 'MarcWeber/vim-addon-mw-utils' "required by snipmate
-Plug 'tomtom/tlib_vim' "required by snipmate
-Plug 'garbas/vim-snipmate' "snippets
-Plug 'skywind3000/asyncrun.vim' "job_start made easier
-" Aspect
-Plug 'morhetz/gruvbox' " gruvbox colorscheme
-" Miscellaneous
-Plug 'terryma/vim-smooth-scroll' " smooth scrolling
-	noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
-	noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
-	noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
-	noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
-call plug#end()
+	call plug#begin('~/.vim/plugged')
+	" Utility
+	Plug 'MarcWeber/vim-addon-mw-utils' "required by snipmate
+	Plug 'tomtom/tlib_vim' "required by snipmate
+	Plug 'garbas/vim-snipmate' "snippets
+	Plug 'skywind3000/asyncrun.vim' "job_start made easier
+	" Aspect
+	Plug 'morhetz/gruvbox' " gruvbox colorscheme
+	" Miscellaneous
+	Plug 'terryma/vim-smooth-scroll' " smooth scrolling
+		noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
+		noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
+		noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
+		noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
+	call plug#end()
+endif
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 set guifont=Consolas:h11
@@ -44,6 +55,7 @@ let mapleader = ','
 nnoremap <Leader>w :bd<cr>
 nnoremap <Leader>c :close<cr>
 nnoremap <Leader>q :quit<cr>
+
 nnoremap <cr> :call append(line("."), "")<cr>
 inoremap <c-e> <c-o>$
 
