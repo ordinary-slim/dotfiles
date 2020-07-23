@@ -1,6 +1,8 @@
-" Plugs. Plug manager is vim-plug
+if has('win32')
+	set shell=powershell
+endif
+" Pluggins. Plug manager is vim-plug
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-" let $HOME = $VIM
 let g:vim_plug_path = $HOME.'/.vim/autoload/plug.vim'
 let &rtp .= g:vim_plug_path
 
@@ -27,6 +29,8 @@ if g:vim_plug_installed
 	Plug 'tomtom/tlib_vim' "required by snipmate
 	Plug 'garbas/vim-snipmate' "snippets
 	Plug 'skywind3000/asyncrun.vim' "job_start made easier
+	" Coding
+	Plug 'JuliaEditorSupport/julia-vim' "julia syntax
 	" Aspect
 	Plug 'morhetz/gruvbox' " gruvbox colorscheme
 	" Miscellaneous
@@ -38,38 +42,51 @@ if g:vim_plug_installed
 	call plug#end()
 endif
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 set guifont=Consolas:h11
 
-silent! colorscheme gruvbox | set background =dark "Setting dark mode
+silent! colorscheme Gruvbox
 
 syntax enable
 let &laststatus = 2 "always show status line
-set number | set numberwidth=3
+set number relativenumber | set numberwidth=3
 
 set autoindent " indent after an indented line
 set breakindent " wrapped lines are indented at ea pseudo new line
 
 " Mappings
-let mapleader = ','
-nnoremap <Leader>w :bd<cr>
+let mapleader = ' '
+nnoremap <Leader>w :w<cr>
+nnoremap <Leader>d :bd<cr>
 nnoremap <Leader>c :close<cr>
 nnoremap <Leader>q :quit<cr>
+nnoremap <Leader>t :call asyncrun#quickfix_toggle(6)<cr>
+nnoremap <Leader>. @:
+nnoremap <Leader>n :bn<cr>
 
 nnoremap <cr> :call append(line("."), "")<cr>
-inoremap <c-e> <c-o>$
+nnoremap K i <cr><esc>
 
-if executable('pdflatex') "TO DO : Make it unix compatible
-	let g:discrete_latex_path = '' "discrete_latex runs pdflatex w/o interaction and returns error level
-	if has('win32')
-		let g:discrete_latex_path = $HOME."/.vim/discrete_latex.bat"
+inoremap <c-e> <c-o>$
+" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+let g:julia_programming = 0
+let g:note_taking = 1
+if g:note_taking
+	if executable('pdflatex') "TO DO : Make it unix compatible
+		let g:discrete_latex_path = '' "discrete_latex runs pdflatex w/o interaction and returns error level
+		if has('win32')
+			let g:discrete_latex_path = $HOME."/.vim/discrete_latex.bat"
+		endif
+		function! CompileLatex()
+			write
+			exec 'AsyncRun '.g:discrete_latex_path.' '.@%
+			copen 6
+			wincmd w
+		endfunction
+		nnoremap <C-Enter> :call CompileLatex() <cr>
+		nnoremap <F11> :exec 'split '.expand('%:t:r').'.log'<cr> /!<cr>
 	endif
-	function! CompileLatex()
-		write
-		exec 'AsyncRun '.g:discrete_latex_path.' '.@%
-		copen 6
-		wincmd w
-	endfunction
-	nnoremap <C-Enter> :call CompileLatex() <cr>
-	nnoremap <F11> :exec 'split '.expand('%:t:r').'.log'<cr> /!<cr>
+endif
+if g:julia_programming
+	let g:julia_path = 'C:\Users\mehdi\AppData\Local\Programs\Julia\Julia-1.4.2\bin\julia.exe'
+	nnoremap <C-Enter> :exec '! '.g:julia_path.' '.@%.' --run'<cr>
 endif
