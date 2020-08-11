@@ -1,5 +1,7 @@
 if has('win32')
 	set shell=powershell
+	set shellcmdflag=-c
+	"set shellxquote=""
 endif
 " Pluggins. Plug manager is vim-plug
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -64,7 +66,7 @@ nnoremap <Leader>. @:
 nnoremap <Leader>n :bn<cr>
 
 nnoremap <cr> :call append(line("."), "")<cr>
-nnoremap K i <cr><esc>
+nnoremap K r<cr>
 
 inoremap <c-e> <c-o>$
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
