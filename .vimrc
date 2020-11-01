@@ -7,14 +7,17 @@
 "|  $$$$$$/| $$| $$| $$ | $$ | $$
 " \______/ |__/|__/|__/ |__/ |__/
 " Shell settings {{{
-if has('win32')
-	set shell=powershell
-	set shellcmdflag=-c
-	set shellxquote=""
-endif
+" set shell=\"C:\Users\U52430\OneDrive\ -\ Bühler\Desktop\Git\git-bash.exe"\
+set shell=powershell
+set shellquote=""
+" set shelltype
+" set shellpipe
+" set shellslash
+" set shellredir
+" set shellcmdflag
 " }}}
 " Pluggins. Plug manager is vim-plug {{{
-let g:vim_plug_path = $HOME.'/.vim/autoload/plug.vim'
+let g:vim_plug_path = $VIM.'/.vim/autoload/plug.vim'
 let &rtp .= ','.g:vim_plug_path
 
 let g:vim_plug_installed = 1
@@ -22,6 +25,7 @@ let g:vim_plug_installed = 1
 if empty(glob(g:vim_plug_path))
 	if executable('curl')
 		silent exec '!curl -fLo '.g:vim_plug_path.' --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+		" previous command could fail but g:vim_plug_path is still set to 1
 		autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 	elseif executable('wget')
 		silent exec '!wget "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" -P '.fnamemodify(g:vim_plug_path, ":h")
@@ -33,8 +37,7 @@ if empty(glob(g:vim_plug_path))
 endif
 if g:vim_plug_installed
 	exec 'source '.g:vim_plug_path
-
-	call plug#begin('~/.vim/plugged')
+	call plug#begin($VIM.'/.vim/plugged')
 	" Utility
 	Plug 'MarcWeber/vim-addon-mw-utils' "required by snipmate
 	Plug 'tomtom/tlib_vim' "required by snipmate
@@ -56,7 +59,11 @@ endif
 " Miscellaneous {{{
 set guifont=Consolas:h11
 
-silent! colorscheme Gruvbox
+try
+	colorscheme Gruvbox
+catch /^Vim\%((\a\+)\)\=:E185:/ 
+	colorscheme desert
+endtry
 
 syntax enable
 let &laststatus = 2 "always show status line
@@ -90,7 +97,8 @@ let g:julia_programming = 0
 let g:note_taking = 1
 " LaTeX {{{
 if g:note_taking
-	let g:tex_no_error = 1
+	let g:tex_flavor = "latex"
+	" let g:tex_no_error = 1 " no error handling atm
 	function! Add_TeX_to_args()
 		if getcwd()==expand('~')
 			echoe '! You should not do this in the root directory.'
@@ -106,17 +114,26 @@ if g:note_taking
 
 	if executable('pdflatex') "TO DO : Make it unix compatible
 		let g:discrete_latex_path = '' "discrete_latex runs pdflatex w/o interaction and returns error level
-		if has('win32')
-			let g:discrete_latex_path = $HOME."/.vim/discrete_latex.bat"
+		if &shell=="powershell"
+			let g:discrete_latex_path = "& \"".$VIM."/discrete_latex.bat"."\"" "& is the call operator, runs a command from a variable (powershell)
+			let g:overleaflike_path = "& \"".$VIM."/overleaflike.bat"."\""
+		elseif stridx(&shell, "git-bash")
 		endif
-		function! CompileLatex()
+
+		function! CompileLaTex()
 			wa
 			let l:existing_buffers = GetBufferList()
 			if (index(l:existing_buffers, 'main.tex')==-1)
-				exec 'AsyncRun '.g:discrete_latex_path.' '.@%
+				if (expand('%:e') != 'tex')&&(expand('%:e') != 'ltx')
+					echoe '! You are trying to LaTeX compile a non-latex file'
+					return -1
+				else
+					let l:mainbuffer = @%
+				endif
 			else
-				exec 'AsyncRun '.g:discrete_latex_path.' main.tex'
+				let l:mainbuffer = 'main.tex'
 			endif
+			exec 'AsyncRun '.g:discrete_latex_path.' '. l:mainbuffer
 			copen 6
 			wincmd w
 		endfunction
@@ -128,10 +145,47 @@ if g:note_taking
 			else
 				exec 'split main.log'
 			endif
-			/!
+			silent! /!
 		endfunction
-		nnoremap <C-Enter> :call CompileLatex() <cr>
-		nnoremap <F11> :call OpenLog()<cr>
+		function! RunBibTex()
+			wa
+			let l:existing_buffers = GetBufferList()
+			if (index(l:existing_buffers, 'main.tex')==-1)
+				if (expand('%:e') != 'tex')&&(expand('%:e') != 'ltx')
+					echoe '! You are trying to solve BiBTeX references for a non-latex file'
+					return -1
+				else
+					let l:mainbuffer = expand("%:t:r") "name of current file
+				endif
+			else
+				let l:mainbuffer = 'main'
+			endif
+			exec 'AsyncRun bibtex '.l:mainbuffer
+			copen 6
+			wincmd w
+		endfunction
+		function! OverleafLikeCompile()
+			wa
+			let l:existing_buffers = GetBufferList()
+			if (index(l:existing_buffers, 'main.tex')==-1)
+				if (expand('%:e') != 'tex')&&(expand('%:e') != 'ltx')
+					echoe '! You are trying to LaTeX compile a non-latex file'
+					return -1
+				else
+					let l:mainbuffer = expand("%:t:r") "name of current file
+				endif
+			else
+				let l:mainbuffer = 'main'
+			endif
+			"let s:job = job_start(g:overleaflike_path . ' ' . l:mainbuffer)
+			exec 'AsyncRun '.g:overleaflike_path.' '. l:mainbuffer
+			copen 6
+			wincmd w
+		endfunction
+		nmap <F8> :call CompileLaTex()<cr>
+		nmap <F10> :call RunBibTex()<cr>
+		nmap <F12> :call OpenLog()<cr>
+		nmap <C-Enter> :call OverleafLikeCompile()<cr>
 	endif
 endif
 " }}}
@@ -160,6 +214,7 @@ function! ToggleQuickFix()
 	" check if quickfix buffer is in a window else open in a window
 	if empty(filter(getwininfo(), 'v:val["quickfix"]'))
 		copen 6
+		normal G
 	else
 		cclose
 	endif
