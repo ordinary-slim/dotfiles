@@ -15,9 +15,25 @@ snippet it
 snippet ~~
 	\tilde{}
 #--------LATEX-COMMANDS------
-snippet lab
-	\label{${0}}
+snippet up
+	\usepackage{${0:/*package name*/}}
+snippet label
+	\label{${1}}${0}
+snippet cite
+	\cite{${1}}${0}
 #--------MATHS---------------
+snippet eq
+	\begin{equation*}
+		${0}
+	\end{equation*}
+snippet leq "labelled equation
+	\begin{equation}\label{eq:${1:meaningful_label}}
+		${0}
+	\end{equation}
+snippet align
+	\begin{align*}
+		${0}
+	\end{align*}
 snippet dot "< . , . >
 	\langle \thinspace ${1}, ${2} \thinspace \rangle ${0}
 snippet a "alpha
@@ -43,7 +59,7 @@ snippet ^^
 snippet &
 	\enspace \& \enspace
 snippet st
-	\thinspace | \thinspace ${0}
+	\thinspace \mid \thinspace ${0}
 snippet mc
 	\mathcal{${1}}${0}
 snippet F
@@ -70,9 +86,14 @@ snippet fall
 	\forall ${0}
 snippet ex "exists
 	\exists ${0}
-snippet overline "overline
+snippet cc "overline
 	\overline{${1}}${0}
 #--------ENVIRONMENTS---------
+snippet frame
+	\begin{frame}
+		\frametitle{${1:/*Not 2 long frame title*/}}
+		${0}
+	\end{frame}
 snippet $
 	$${0}$
 snippet $$
@@ -92,8 +113,8 @@ snippet itemize
 		\item ${1:/* First item */}
 		\item ${2:/* Second item */}
 	\end{itemize}
-snippet enumerate "requires package enumerate"
-	\begin{enumerate}[label = \roman*.]
+snippet enumerate
+	\begin{enumerate}
 		\item ${1:/* First item */}
 		\item ${2:/* Second item */}
 	\end{enumerate}
@@ -101,6 +122,10 @@ snippet item
 	\item ${0:/* Another one */}
 snippet 1env
 	\begin{${1:environment w/ one argument}}{${2:first_argument}}
+		${0:/* contents */}
+	\end{$1}
+snippet 1envo
+	\begin{${1:environment name}}[${2:options}]{${3:first_argument}}
 		${0:/* contents */}
 	\end{$1}
 snippet 2env
@@ -142,6 +167,14 @@ snippet prop "created label is prop:$2
 	\begin{myprop}{${1}}{${2}}
 		${3:/* contents */}
 	\end{myprop}
+	${0}
+snippet figure
+	\begin{figure}[${1}]
+		\centering
+	        \includegraphics[width=${2}\textwidth]{${3:/*path to figure*/}}
+		\caption{${4}}
+		\label{${5}}
+	\end{figure}
 	${0}
 #--------EXAMPLES--------------
 snippet div
