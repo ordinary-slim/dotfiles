@@ -7,10 +7,9 @@
 "|  $$$$$$/| $$| $$| $$ | $$ | $$
 " \______/ |__/|__/|__/ |__/ |__/
 " 
-" Single session settings{{{
-set syn=dcl
-" }}}
 " User defined modes {{{
+" Self implementation of filetype detection
+" should be refactored! Rely on vim tools
 let g:ExtensionFirstArgument = fnamemodify(argv(0), ":e")
 
 let g:LaTeX=0
@@ -18,7 +17,7 @@ if g:ExtensionFirstArgument=="tex" || &ft=="tex"
     let g:LaTeX=1
 endif
 " }}}
-" Plugins {{{
+" Plugin manager {{{
     call plug#begin('~/.config/nvim/plugged')
 
         Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh' }
@@ -42,9 +41,6 @@ endif
         Plug 'rafi/awesome-vim-colorschemes'
     call plug#end()
 " }}}
-" Autocompletion {{{
-set completeopt=menu,menuone,noselect
-" }}}
 " LUA {{{
 lua << EOF
 -- Setup nvim_lsp
@@ -55,10 +51,12 @@ local mynvimcmp = require('mynvimcmp')
 local myluasnip = require('myluasnip')
 EOF
 " }}}
-" nvim-gdb {{{
+" Plugin settings {{{
+" nvimgdb {{
 let g:nvimgdb_config_override = {
   \ 'key_step': '<ctrl-s>',
   \ }
+" }}
 " }}}
 " General {{{
     colorscheme gruvbox
@@ -73,6 +71,7 @@ let g:nvimgdb_config_override = {
     filetype indent on "filetype based indentation
 " Statusline {
     set laststatus=2
+    set completeopt=menu,menuone,noselect
 "}
 " Tabs {
     set autoindent
@@ -117,6 +116,7 @@ let fortran_have_tabs=1 "fortran77 syntax highlighting
     " nnoremap K mpi<cr><Esc> `p "overwrites lsp hover
 " }}}
 " LaTeX {{{
+" Should be refactored !!!
 if g:LaTeX
     let g:tex_flavor = "tex"
     " Functions
@@ -157,7 +157,7 @@ if g:LaTeX
     nmap <F9> :call LongLatexCompile()<cr>
 endif
 " }}}
-" Other functions {{{
+" Utility functions {{{
 function ToggleQuickFixWindow()
     "if quickfixwindow is open, close it, and viceversa
     " check if quickfixwindow is currently open
