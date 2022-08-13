@@ -6,6 +6,7 @@ local i = ls.insert_node
 local f = ls.function_node
 local d = ls.dynamic_node
 local c = ls.choice_node
+local ri = require('luasnip_utils').ri
 
 ls.add_snippets("tex", {
   s("ternary", {
@@ -14,5 +15,10 @@ ls.add_snippets("tex", {
   }),
   s("hallo", {
     t("Baaaaaaaaby!"),
+  }),
+  s("test", {
+    i(1, 'insert node'),
+    t({'', 'some other text on a new line', ''}),
+    ri(1),
   }),
 })

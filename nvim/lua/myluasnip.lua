@@ -22,3 +22,10 @@ ls.config.set_config({
 		-- },
 	},
 }) --}}}
+
+-- Util functions for snippets
+-- Repeat Insertnode text
+-- @param insert_node_id The id of the insert node to repeat (the first line from)
+local ri = function (insert_node_id)
+    return f(function (args) return args[1][1] end, insert_node_id)
+end
