@@ -41,13 +41,6 @@ local mynvimcmp = require('mynvimcmp')
 local myluasnip = require('myluasnip')
 EOF
 " }}}
-" Plugin settings {{{
-" nvimgdb {{
-let g:nvimgdb_config_override = {
-  \ 'key_step': '<ctrl-s>',
-  \ }
-" }}
-" }}}
 " General {{{
     colorscheme gruvbox
     " determine directory of .vimrc
@@ -69,9 +62,17 @@ let g:nvimgdb_config_override = {
     set shiftwidth=2
     set expandtab
 "}
-" Coding {
-let fortran_have_tabs=1 "fortran77 syntax highlighting
+" Filetype specific {
+    let fortran_have_tabs=1 "fortran77 syntax highlighting
+    let g:tex_flavor= "tex" "treat plaintex as tex
 "}
+" }}}
+" Plugin settings {{{
+" nvimgdb {{
+let g:nvimgdb_config_override = {
+  \ 'key_step': '<ctrl-s>',
+  \ }
+" }}
 " }}}
 " Mappings {{{
     let mapleader = ' '

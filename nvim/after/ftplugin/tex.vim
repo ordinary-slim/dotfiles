@@ -1,4 +1,3 @@
-let g:tex_flavor        = "tex"
 let g:tex_executable    = "lualatex"
 let g:bibtex_executable = "bibtex"
 " Functions {{{

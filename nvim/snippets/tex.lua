@@ -41,4 +41,83 @@ ls.add_snippets("tex", {
 	i(2),
   })
   ),
+  s(
+  "itemize",
+  fmt([[
+      \begin{{itemize}}
+        \item {}
+      \end{{itemize}}
+      ]], {
+      i(1, "/** Item **/"),
+  })
+  ),
+  s(
+  "itm",
+  fmt([[
+      \item {}
+      ]], {
+      i(1, "/** Item **/"),
+    })
+  ),
+  s(
+  "fig",
+  fmt([[
+      \begin{{figure}}[ht]
+        \centering
+        {}
+        \caption{{{}}}
+        \label{{fig:{}}}
+      \end{{figure}}
+      ]], {
+        i(1, "/*Figure command*/"),
+        i(2, "/*Figure caption*/"),
+        i(3, "/*Figure label*/"),
+      })
+  ),
+  s(
+  "ig",
+  fmt([[
+      \includegraphics[width={}\textwidth]{{{}}}
+      ]], {
+        i(1, "0.5"),
+        i(2, "/*Graphics path*/"),
+      })
+  ),
+  s(
+  "cig",
+  fmt([[
+      \castelincfig[{}]{{{}}}
+      ]], {
+        i(1, "0.5"),
+        i(2, "/*Graphics path*/"),
+      })
+  ),
+  s(
+  "bf",
+  fmt([[
+      \textbf{{{}}}
+      ]], {
+        i(1, "/*bold text*/"),
+      })
+  ),
+  s(
+  "it",
+  fmt([[
+      \textit{{{}}}
+      ]], {
+        i(1, "/*itallic text*/"),
+      })
+  ),
+  s(
+  "eqt",
+  fmt([[
+      \begin{{{}}}
+        {}
+      \end{{{}}}
+      ]], {
+        i(1, "equation*"),
+        i(2, ""),
+        ri(1),
+      })
+  ),
 })
