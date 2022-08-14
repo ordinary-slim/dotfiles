@@ -7,16 +7,6 @@
 "|  $$$$$$/| $$| $$| $$ | $$ | $$
 " \______/ |__/|__/|__/ |__/ |__/
 " 
-" User defined modes {{{
-" Self implementation of filetype detection
-" should be refactored! Rely on vim tools
-let g:ExtensionFirstArgument = fnamemodify(argv(0), ":e")
-
-let g:LaTeX=0
-if g:ExtensionFirstArgument=="tex" || &ft=="tex"
-    let g:LaTeX=1
-endif
-" }}}
 " Plugin manager {{{
     call plug#begin('~/.config/nvim/plugged')
 
@@ -83,7 +73,7 @@ let g:nvimgdb_config_override = {
 let fortran_have_tabs=1 "fortran77 syntax highlighting
 "}
 " }}}
-" General mappings {{{
+" Mappings {{{
     let mapleader = ' '
     nnoremap <Leader>w :wa<cr>
     nnoremap <Leader>q :qa<cr>
@@ -114,48 +104,6 @@ let fortran_have_tabs=1 "fortran77 syntax highlighting
     nnoremap <cr> :normal mpo<Esc>`p
 
     " nnoremap K mpi<cr><Esc> `p "overwrites lsp hover
-" }}}
-" LaTeX {{{
-" Should be refactored !!!
-if g:LaTeX
-    let g:tex_flavor = "tex"
-    " Functions
-    function GetTexBuffer()
-        let l:existing_buffers = GetBufferList()
-        if (index(l:existing_buffers, 'main.tex')==-1)
-            if (expand('%:e') != 'tex')&&(expand('%:e') != 'ltx')
-                echo "Are you sure you've got the right file?"
-                echo "Exiting execution before compilation..."
-                return
-            else
-                let l:mainbuffer = @%
-            endif
-        else
-            let l:mainbuffer = 'main.tex'
-        endif
-        return l:mainbuffer
-    endfunction
-    function QuickLatexCompile()
-        let l:mainbuffer=GetTexBuffer()
-        wall
-        exec "!lualatex -shell-escape " . l:mainbuffer
-    endfunction
-
-    function LongLatexCompile()
-        "writes current buffer then calls lualatex once, bibtex once, lualatex
-        "twice
-        let l:mainbuffer=GetTexBuffer()
-        wall
-        exec "!lualatex -shell-escape " . l:mainbuffer
-        " GOTTA CORRECT THIS!!!
-        exec "!bibtex " . fnamemodify(l:mainbuffer, ":r")
-        exec "!lualatex -shell-escape " . l:mainbuffer
-        exec "!lualatex -shell-escape " . l:mainbuffer
-    endfunction
-    " Mappings
-    nnoremap <F8> :call QuickLatexCompile()<cr>
-    nmap <F9> :call LongLatexCompile()<cr>
-endif
 " }}}
 " Utility functions {{{
 function ToggleQuickFixWindow()
@@ -189,7 +137,7 @@ function! GetBufferList()
 	return l:existing_buffers
 endfunction
 " }}}
-" Modelines {{{
+" Modelines (folds) {{{
 " Must be near (5 lines within) the top/bottom)
 " vim:foldmethod=marker:foldlevel=0
 " }}}
