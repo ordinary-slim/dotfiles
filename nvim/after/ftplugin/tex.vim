@@ -1,4 +1,4 @@
-let g:tex_executable    = "lualatex"
+let g:tex_executable    = "pdflatex"
 let g:bibtex_executable = "bibtex"
 " Functions {{{
 function GetTexBuffer()
@@ -33,7 +33,6 @@ function OverleafLikeCompile()
     let l:mainbuffer=GetTexBuffer()
     wall
     exec "!" . g:tex_executable . " -shell-escape " . l:mainbuffer
-    " GOTTA CORRECT THIS!!!
     exec "!" . g:bibtex_executable .  " " . fnamemodify(l:mainbuffer, ":r")
     exec "!" . g:tex_executable . " -shell-escape " . l:mainbuffer
     exec "!" . g:tex_executable . " -shell-escape " . l:mainbuffer
