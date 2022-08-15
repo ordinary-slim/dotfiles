@@ -137,6 +137,14 @@ function! GetBufferList()
 	endfor
 	return l:existing_buffers
 endfunction
+function! PrintShellErrorStatus()
+	" check error status of the shell
+  if (v:shell_error==0)
+    echo "Last shell command succeeded"
+  else
+    echo "Last shell command FAILED"
+  endif
+endfunction
 " }}}
 " Modelines (folds) {{{
 " Must be near (5 lines within) the top/bottom)

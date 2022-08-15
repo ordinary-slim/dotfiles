@@ -1,5 +1,7 @@
-let g:tex_executable    = "pdflatex"
-let g:bibtex_executable = "bibtex"
+let g:Ctex    = "pdflatex" "latex compiler
+"flags
+let g:CFtex   = "-shell-escape"
+let g:Cbibtex = "bibtex"
 " Functions {{{
 function GetTexBuffer()
     let l:existing_buffers = GetBufferList()
@@ -19,12 +21,14 @@ endfunction
 function QuickLatexCompile()
     let l:mainbuffer=GetTexBuffer()
     wall
-    exec "!" . g:tex_executable . " -shell-escape " . l:mainbuffer
+    silent exec printf("!%s %s %s", g:Ctex, g:CFtex, l:mainbuffer)
+    call PrintShellErrorStatus()
 endfunction
 function BibtexCall()
     let l:mainbuffer=GetTexBuffer()
     wall
-    exec "!" . g:bibtex_executable .  " " . fnamemodify(l:mainbuffer, ":r")
+    silent exec printf("!%s %s", g:Cbibtex, fnamemodify(l:mainbuffer, ":r"))
+    call PrintShellErrorStatus()
 endfunction
 
 function OverleafLikeCompile()
@@ -32,10 +36,11 @@ function OverleafLikeCompile()
     "twice
     let l:mainbuffer=GetTexBuffer()
     wall
-    exec "!" . g:tex_executable . " -shell-escape " . l:mainbuffer
-    exec "!" . g:bibtex_executable .  " " . fnamemodify(l:mainbuffer, ":r")
-    exec "!" . g:tex_executable . " -shell-escape " . l:mainbuffer
-    exec "!" . g:tex_executable . " -shell-escape " . l:mainbuffer
+    silent exec printf("!%s %s %s", g:Ctex, g:CFtex, l:mainbuffer)
+    silent exec printf("!%s %s", g:Cbibtex, fnamemodify(l:mainbuffer, ":r"))
+    silent exec printf("!%s %s %s", g:Ctex, g:CFtex, l:mainbuffer)
+    silent exec printf("!%s %s %s", g:Ctex, g:CFtex, l:mainbuffer)
+    call PrintShellErrorStatus()
 endfunction
 " }}}
 " Mappings {{{
