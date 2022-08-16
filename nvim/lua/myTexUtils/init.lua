@@ -8,24 +8,41 @@ myTexUtils.bibtex  = "bibtex"
 
 -- Functions
 function myTexUtils:getTexDriver()
-  -- Get path of driver tex file which will be compiled
-  -- TO-DO: fully move GetTexBuffer from commit e6ae46f
+  --[[
+  Get path of driver tex file which will be compiled from buffer list
+  TO-DO: fully move GetTexBuffer from commit e6ae46f
+  --]]
   return "main.tex"
 end
 function myTexUtils:compileTex()
   -- LaTeX compile in background
   handle = vim.loop.spawn(self.texC, {
-  args = {self.getTexDriver()},
+  args = {self:getTexDriver()},
   },
   function (code, signal) -- on exit callback
-    if (code~=0) then
-      print(code .. " prev comm failed")
+    if (code==0) then
+      print("Last compile succeeded")
+    else
+      print("Last compile FAILED, check logfile")
     end
   end
   )
 end
-
--- Mappings
-vim.keymap.set('n', '<F8>', '<cmd>lua require"myTexUtils":compileTex()<cr>')
+function myTexUtils:callBibTex()
+  -- bibtex call in background
+  target = self:getTexDriver()
+  target = target:match("(%w+)%..+$")--keep only filename
+  handle = vim.loop.spawn(self.bibtex, {
+  args = {target},
+  },
+  function (code, signal) -- on exit callback
+    if (code==0) then
+      print("Last bibtex succeeded")
+    else
+      print("Last bibtex FAILED, check logfile")
+    end
+  end
+  )
+end
 
 return myTexUtils
