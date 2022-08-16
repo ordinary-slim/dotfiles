@@ -39,6 +39,8 @@ local mynvim_lsp = require('mynvimlsp')
 local mynvimcmp = require('mynvimcmp')
 -- Setup LuaSnip
 local myluasnip = require('myluasnip')
+-- My tex utils (background compilation)
+local myTexUtils = require('myTexUtils')
 EOF
 " }}}
 " General {{{

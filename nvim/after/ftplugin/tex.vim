@@ -44,9 +44,9 @@ function OverleafLikeCompile()
 endfunction
 " }}}
 " Mappings {{{
-nnoremap <F8> :call QuickLatexCompile()<cr>
-nnoremap <F9> :call BibtexCall()<cr>
-nmap <F10> :call OverleafLikeCompile()<cr>
+" nnoremap <F8> :call QuickLatexCompile()<cr>
+" nnoremap <F9> :call BibtexCall()<cr>
+" nmap <F10> :call OverleafLikeCompile()<cr>
 " }}}
 " Modelines {{{
 " Must be near (5 lines within) the top/bottom)
