@@ -1,0 +1,153 @@
+#--------HEADER--------------
+snippet header "latex header"
+	\title{${1}}
+	\date{\vspace{-5ex}}
+	\input{C:/Users/mehdi/vimfiles/latexHeader_noteTaking.tex}
+	\begin{document}
+	\maketitle
+	${0}
+	\end{document}
+#--------TEXT----------------
+snippet bf
+	\textbf{${1}}${0}
+snippet it
+	\textit{${1}}${0}
+snippet ~~
+	\tilde{}
+#--------LATEX-COMMANDS------
+snippet lab
+	\label{${0}}
+#--------MATHS---------------
+snippet a "alpha
+	\alpha
+snippet b "beta
+	\beta
+snippet , "comma with math mode spacing
+	, \enskip ${0}
+snippet txt
+	\text{${1:/* text in math mode */}}${0}
+snippet *
+	\mathbf{${1:/* Bold math text */}}${0}
+snippet function
+	\begin{align*}
+		${1:f} : ${2:domain} &\to ${3:range}\\\\
+			 ${4:el. of domain} &\mapsto ${5:el. of range}
+	\end{align*}
+	${0}
+snippet _
+	_{${1:subscript}}${0}
+snippet ^^
+	^{${1:superscript}}${0}
+snippet &
+	\enspace \& \enspace
+snippet st
+	\thinspace \mid \thinspace ${0}
+snippet mc
+	\mathcal{${1}}${0}
+snippet F
+	\mathbb{F}${0}
+snippet C
+	\mathbb{C}${0}
+snippet R
+	\mathbb{R}${0}
+snippet Q
+	\mathbb{Q}${0}
+snippet Z
+	\mathbb{Z}${0}
+snippet N
+	\mathbb{N}${0}
+snippet set
+	\{${1:set contents}\}${0}
+snippet sum
+	\sum_{${1:k=1}}^{${2:N}}
+snippet frac
+	\frac{${1}}{${2}}
+snippet int "integral"
+	\int_{${1}}{${2}}
+snippet fall
+	\forall ${0}
+snippet ex "exists
+	\exists ${0}
+snippet overline "overline
+	\overline{${1}}${0}
+#--------ENVIRONMENTS---------
+snippet $
+	$${0}$
+snippet $$
+	$$${0}$$
+snippet cases
+	\begin{cases} ${1:First case} \\\\ ${2:Second case} \end{cases} ${0}
+snippet benv
+	\begin{${1:basic environment}} 
+		${0:/* contents */}
+	\end{$1}
+snippet benvo
+	\begin{${1:basic environment}}[${2:options}]
+		${0:/* contents */}
+	\end{$1}
+snippet itemize
+	\begin{itemize}
+		\item ${1:/* First item */}
+		\item ${2:/* Second item */}
+	\end{itemize}
+snippet enumerate "requires package enumerate"
+	\begin{enumerate}[label = \roman*.]
+		\item ${1:/* First item */}
+		\item ${2:/* Second item */}
+	\end{enumerate}
+snippet item
+	\item ${0:/* Another one */}
+snippet 1env
+	\begin{${1:environment w/ one argument}}{${2:first_argument}}
+		${0:/* contents */}
+	\end{$1}
+snippet 2env
+	\begin{${1:environment w/ one argument}}{${2:first_argument}}{${3:second_argument}}
+		${0:/* contents of environment w/ 2 arguments*/}
+	\end{$1}
+snippet sec
+	\section{${1:section_name}}\label{sec:${2:section_label}}
+	${0:/* contents */}
+snippet ssec
+	\subsection{${1:subsection_name}}\label{subsec:${2:subsection_label}}
+	${0:/* contents */}
+snippet thm "created label is th:theorem_label"
+	\begin{mythm}{${1:/* Name of theorem */}}{${2:/* theorem_label */}}
+		${3:/* contents */}
+	\end{mythm}
+	${0}
+snippet def "created label is def:definition_label"
+	\begin{mydef}{${1:/* Defined object */}}{${2:/* definition_label */}}
+		${3:/* contents */}
+	\end{mydef}
+	${0}
+snippet proof
+	\begin{myproof}
+		${1:/* actual proof */}
+	\end{myproof}
+	${0}
+snippet example
+	\begin{myeg}{${1}}
+		${2:/* actual example */}
+	\end{myeg}
+	${0}
+snippet corollary
+	\begin{mycorollary}{${1}}
+		${2:/* actual corollary */}
+	\end{mycorollary}
+	${0}
+snippet prop "created label is prop:$2
+	\begin{myprop}{${1}}{${2}}
+		${3:/* contents */}
+	\end{myprop}
+	${0}
+#--------EXAMPLES--------------
+snippet div
+	<div id="${1:id}" class="${2:class}">
+		${0}
+	</div>
+snippet for
+	for ($1 = ${2:start}; ${1:i} < ${3:end}; $1${4:++}) {
+		${0:/* code */}
+	}
+

@@ -1,7 +1,8 @@
 local ls = require("luasnip")
 
--- lazy load by filename / path
+-- lazy load by filename / path in lua and snipmate formats
 require("luasnip.loaders.from_lua").load({paths = "~/.config/nvim/snippets"})
+require("luasnip.loaders.from_snipmate").load({paths = "~/.config/nvim/snippets"})
 
 -- Virtual Text{{{
 local types = require("luasnip.util.types")

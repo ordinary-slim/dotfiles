@@ -1,6 +1,7 @@
 Configuration files from my office computer.
 
 ## TODO
+- [ ] Look for last version of my snipmate snippets
 - [ ] Clean detection of main buffer.
 - [ ] Overleaf like compile (latex, bibtex, 2latex)
 - [x] LaTeX async run

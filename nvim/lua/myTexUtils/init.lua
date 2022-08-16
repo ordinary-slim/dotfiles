@@ -16,6 +16,7 @@ function myTexUtils:getTexDriver()
 end
 function myTexUtils:compileTex()
   -- LaTeX compile in background
+  vim.cmd("wall") -- write all changed buffers
   handle = vim.loop.spawn(self.texC, {
   args = {self:getTexDriver()},
   },
