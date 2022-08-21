@@ -17,6 +17,7 @@ end
 function myTexUtils:compileTex()
   -- LaTeX compile in background
   vim.cmd("wall") -- write all changed buffers
+  print("Compiling ...")
   handle = vim.loop.spawn(self.texC, {
   args = {self:getTexDriver()},
   },
@@ -31,6 +32,8 @@ function myTexUtils:compileTex()
 end
 function myTexUtils:callBibTex()
   -- bibtex call in background
+  vim.cmd("wall") -- write all changed buffers
+  print("Calling BibTex ...")
   target = self:getTexDriver()
   target = target:match("(%w+)%..+$")--keep only filename
   handle = vim.loop.spawn(self.bibtex, {
