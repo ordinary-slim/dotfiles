@@ -81,8 +81,9 @@ let g:nvimgdb_config_override = {
     nnoremap <Leader>w :wa<cr>
     nnoremap <Leader>q :qa<cr>
     nnoremap <Leader>d :bp\|bd #<cr>
-    " contained in autoload
-    nnoremap <Leader>e :call ud_loadsameextension#LoadSameExtension()<cr>
+    nnoremap <Leader>r :e<cr>zz
+    "nnoremap <Leader>e :call ud_loadsameextension#LoadSameExtension()<cr>
+    "Does not work in nvim
     " defined in Other functions (last section of this file)
     nnoremap <Leader>t :call ToggleQuickFixWindow()<cr>
 
