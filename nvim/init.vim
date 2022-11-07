@@ -10,10 +10,13 @@
 " Plugin manager {{{
     call plug#begin('~/.config/nvim/plugged')
 
+        " gdb inside vim
         Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh' }
             let w:nvimgdb_termwin_command = "belowright new"
+        " seamless vim/tmux pane navigation
         Plug 'christoomey/vim-tmux-navigator'
 
+        " language server protocols
         Plug 'neovim/nvim-lspconfig'
 
         " autocomplete
@@ -23,12 +26,15 @@
         Plug 'hrsh7th/cmp-cmdline'
         Plug 'hrsh7th/nvim-cmp'
 
-        " For luasnip users.
+        " luasnip
         Plug 'L3MON4D3/LuaSnip'
         Plug 'saadparwaiz1/cmp_luasnip'
 
         "shitton of colorschemes
         Plug 'rafi/awesome-vim-colorschemes'
+
+        " ''premier Vim plugin for Git. Or maybe it's the premier Git plugin for Vim``
+        Plug 'tpope/vim-fugitive'
     call plug#end()
 " }}}
 " LUA {{{

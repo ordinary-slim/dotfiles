@@ -101,6 +101,14 @@ ls.add_snippets("tex", {
       })
   ),
   s(
+  "ttt",
+  fmt([[
+      \texttt{{{}}}
+      ]], {
+        i(1, "/*fixed space text*/"),
+      })
+  ),
+  s(
   "it",
   fmt([[
       \textit{{{}}}
