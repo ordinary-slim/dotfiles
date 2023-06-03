@@ -50,7 +50,7 @@ local myTexUtils = require('myTexUtils')
 EOF
 " }}}
 " General {{{
-    colorscheme gruvbox
+    colorscheme deus
     " determine directory of .vimrc
     let vimrc_folder = split($MYVIMRC, "init.vim")[0]
 
@@ -154,6 +154,23 @@ function! PrintShellErrorStatus()
     echo "Last shell command FAILED"
   endif
 endfunction
+" Highlight a column in csv text.
+" :Csv 1    " highlight first column
+" :Csv 12   " highlight twelfth column
+" :Csv 0    " switch off highlight
+function! CSVH(colnr)
+  if a:colnr > 1
+    let n = a:colnr - 1
+    execute 'match Keyword /^\([^,]*,\)\{'.n.'}\zs[^,]*/'
+    execute 'normal! 0'.n.'f,'
+  elseif a:colnr == 1
+    match Keyword /^[^,]*/
+    normal! 0
+  else
+    match
+  endif
+endfunction
+command! -nargs=1 Csv :call CSVH(<args>)
 " }}}
 " Modelines (folds) {{{
 " Must be near (5 lines within) the top/bottom)
