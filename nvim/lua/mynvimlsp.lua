@@ -1,6 +1,6 @@
 local nvim_lsp = require('lspconfig')
 -- Instaleld servers
-servers = { 'pyright', 'fortls', 'clangd', 'texlab', 'lemminx', 'cmake' }
+servers = { 'pyright', 'fortls', 'clangd', 'texlab', 'lemminx', 'cmake', 'bashls' }
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)

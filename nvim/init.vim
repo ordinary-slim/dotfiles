@@ -1,11 +1,17 @@
-"  /$$$$$$  /$$ /$$
-" /$$__  $$| $$|__/
-"| $$  \__/| $$ /$$ /$$$$$$/$$$$
-"|  $$$$$$ | $$| $$| $$_  $$_  $$
-" \____  $$| $$| $$| $$ \ $$ \ $$
-" /$$  \ $$| $$| $$| $$ | $$ | $$
-"|  $$$$$$/| $$| $$| $$ | $$ | $$
-" \______/ |__/|__/|__/ |__/ |__/
+"
+"           .---.
+"           |   |.--. __  __   ___
+"           |   ||__||  |/  `.'   `.
+"           |   |.--.|   .-.  .-.   '
+"           |   ||  ||  |  |  |  |  |
+"       _   |   ||  ||  |  |  |  |  |
+"     .' |  |   ||  ||  |  |  |  |  |
+"    .   | /|   ||  ||  |  |  |  |  |
+"  .'.'| |//|   ||__||__|  |__|  |__|
+".'.'.-'  / '---'
+".'   \_.'
+"
+"
 " 
 " Plugin manager {{{
     call plug#begin('~/.config/nvim/plugged')
@@ -30,7 +36,7 @@
         Plug 'L3MON4D3/LuaSnip'
         Plug 'saadparwaiz1/cmp_luasnip'
 
-        "shitton of colorschemes
+        " Colorschemes
         Plug 'rafi/awesome-vim-colorschemes'
 
         " ''premier Vim plugin for Git. Or maybe it's the premier Git plugin for Vim``
@@ -50,7 +56,7 @@ local myTexUtils = require('myTexUtils')
 EOF
 " }}}
 " General {{{
-    colorscheme deus
+    colorscheme default
     " determine directory of .vimrc
     let vimrc_folder = split($MYVIMRC, "init.vim")[0]
 
@@ -86,6 +92,7 @@ let g:nvimgdb_config_override = {
     let mapleader = ' '
     nnoremap <Leader>w :wa<cr>
     nnoremap <Leader>q :qa<cr>
+    nnoremap <Leader>c :close<cr>
     nnoremap <Leader>d :bp\|bd #<cr>
     nnoremap <Leader>r :e<cr>zz
     "nnoremap <Leader>e :call ud_loadsameextension#LoadSameExtension()<cr>
