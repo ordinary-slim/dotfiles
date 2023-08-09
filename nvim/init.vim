@@ -56,7 +56,7 @@ local myTexUtils = require('myTexUtils')
 EOF
 " }}}
 " General {{{
-    colorscheme default
+    colorscheme oceanic_material
     " determine directory of .vimrc
     let vimrc_folder = split($MYVIMRC, "init.vim")[0]
 
@@ -95,32 +95,28 @@ let g:nvimgdb_config_override = {
     nnoremap <Leader>c :close<cr>
     nnoremap <Leader>d :bp\|bd #<cr>
     nnoremap <Leader>r :e<cr>zz
-    "nnoremap <Leader>e :call ud_loadsameextension#LoadSameExtension()<cr>
-    "Does not work in nvim
-    " defined in Other functions (last section of this file)
-    nnoremap <Leader>t :call ToggleQuickFixWindow()<cr>
+    nnoremap <Leader>f :call ToggleQuickFixWindow()<cr>
+    nnoremap <Leader>tc :tabclose<cr>
 
-    " Use ctrl-[hjkl] to select the active split!
+    " Use ctrl-[hjkl] to select the active split! "
     nmap <silent> <c-k> :wincmd k<CR>
     nmap <silent> <c-j> :wincmd j<CR>
     nmap <silent> <c-h> :wincmd h<CR>
     nmap <silent> <c-l> :wincmd l<CR>
 
-    " navigate buffer list
+    " navigate buffer list "
     nnoremap <c-n> :bn<cr>
     nnoremap <c-p> :bp<cr>
     nnoremap <BS> <c-^>
 
-    " navigate quickfix list
+    " navigate quickfix list "
     nnoremap ]q :cnext<cr>
     nnoremap [q :cprev<cr>
 
-    " experimental
-    " TO CHANGE: not overwriting content of register p
-    "" insert new line and come back at exact position
+    " TO CHANGE: not overwriting content of register p "
+    " insert new line and come back at exact position "
     nnoremap <cr> :normal mpo<Esc>`p
 
-    " nnoremap K mpi<cr><Esc> `p "overwrites lsp hover
 " }}}
 " Utility functions {{{
 function ToggleQuickFixWindow()
