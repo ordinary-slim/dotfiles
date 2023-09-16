@@ -56,7 +56,7 @@ local myTexUtils = require('myTexUtils')
 EOF
 " }}}
 " General {{{
-    colorscheme oceanic_material
+    colorscheme peachpuff
     " determine directory of .vimrc
     let vimrc_folder = split($MYVIMRC, "init.vim")[0]
 
