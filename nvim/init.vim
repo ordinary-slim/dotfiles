@@ -41,6 +41,10 @@
 
         " ''premier Vim plugin for Git. Or maybe it's the premier Git plugin for Vim``
         Plug 'tpope/vim-fugitive'
+
+        " highly extendable fuzzy finder over lists
+        Plug 'nvim-lua/plenary.nvim'
+        Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.3' }
     call plug#end()
 " }}}
 " LUA {{{
@@ -56,37 +60,9 @@ local myTexUtils = require('myTexUtils')
 EOF
 " }}}
 " General {{{
-    colorscheme peachpuff
-    " determine directory of .vimrc
-    let vimrc_folder = split($MYVIMRC, "init.vim")[0]
-
-    set mouse=a
-    set nohlsearch
-    set nu rnu
-    set hidden
-    syntax on
-    filetype indent on "filetype based indentation
-" Statusline {
-    set laststatus=2
-    set completeopt=menu,menuone,noselect
-"}
-" Tabs {
-    set autoindent
-    set tabstop=2
-    set shiftwidth=2
-    set expandtab
-"}
-" Filetype specific {
-    let fortran_have_tabs=1 "fortran77 syntax highlighting
-    let g:tex_flavor= "tex" "treat plaintex as tex
-"}
-" }}}
-" Plugin settings {{{
-" nvimgdb {{
-let g:nvimgdb_config_override = {
-  \ 'key_step': '<ctrl-s>',
-  \ }
-" }}
+lua << EOF
+require('settings')
+EOF
 " }}}
 " Mappings {{{
     let mapleader = ' '
