@@ -71,8 +71,14 @@ EOF
     nnoremap <Leader>c :close<cr>
     nnoremap <Leader>d :bp\|bd #<cr>
     nnoremap <Leader>r :e<cr>zz
-    nnoremap <Leader>f :call ToggleQuickFixWindow()<cr>
+    nnoremap <Leader>w :call ToggleQuickFixWindow()<cr>
     nnoremap <Leader>tc :tabclose<cr>
+
+    " Telescope "
+    nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
+    nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
+    nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
+    nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 
     " Use ctrl-[hjkl] to select the active split! "
     nmap <silent> <c-k> :wincmd k<CR>
