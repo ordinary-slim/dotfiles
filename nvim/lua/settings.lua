@@ -1,4 +1,4 @@
-vim.cmd("colorscheme peachpuff")
+vim.cmd("colorscheme 256_noir")
 vim.opt.mouse = "a"
 vim.opt.hlsearch = false
 vim.opt.nu = true
@@ -21,5 +21,7 @@ vim.g.tex_flavor= "tex" -- treat plaintex as tex
 vim.g.nvimgdb_config_override = {
   key_step = "ctrl-s",
 }
+
+require("lualine").setup()
 
 -- TODO: Add folds

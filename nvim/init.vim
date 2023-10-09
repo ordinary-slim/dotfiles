@@ -45,6 +45,11 @@
         " highly extendable fuzzy finder over lists
         Plug 'nvim-lua/plenary.nvim'
         Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.3' }
+
+        " Statusline
+        Plug 'nvim-lualine/lualine.nvim'
+        " If you want to have icons in your statusline choose one of these
+        Plug 'nvim-tree/nvim-web-devicons'
     call plug#end()
 " }}}
 " LUA {{{
@@ -62,43 +67,8 @@ EOF
 " General {{{
 lua << EOF
 require('settings')
+require('keybinds')
 EOF
-" }}}
-" Mappings {{{
-    let mapleader = ' '
-    nnoremap <Leader>w :wa<cr>
-    nnoremap <Leader>q :qa<cr>
-    nnoremap <Leader>c :close<cr>
-    nnoremap <Leader>d :bp\|bd #<cr>
-    nnoremap <Leader>r :e<cr>zz
-    nnoremap <Leader>w :call ToggleQuickFixWindow()<cr>
-    nnoremap <Leader>tc :tabclose<cr>
-
-    " Telescope "
-    nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
-    nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
-    nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
-    nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
-
-    " Use ctrl-[hjkl] to select the active split! "
-    nmap <silent> <c-k> :wincmd k<CR>
-    nmap <silent> <c-j> :wincmd j<CR>
-    nmap <silent> <c-h> :wincmd h<CR>
-    nmap <silent> <c-l> :wincmd l<CR>
-
-    " navigate buffer list "
-    nnoremap <c-n> :bn<cr>
-    nnoremap <c-p> :bp<cr>
-    nnoremap <BS> <c-^>
-
-    " navigate quickfix list "
-    nnoremap ]q :cnext<cr>
-    nnoremap [q :cprev<cr>
-
-    " TO CHANGE: not overwriting content of register p "
-    " insert new line and come back at exact position "
-    nnoremap <cr> :normal mpo<Esc>`p
-
 " }}}
 " Utility functions {{{
 function ToggleQuickFixWindow()
