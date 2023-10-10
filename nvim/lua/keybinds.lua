@@ -1,19 +1,20 @@
 local keymap = vim.keymap
-vim.g.mapleader = ' '
 
 keymap.set('n', '<Leader>w', ':wa<cr>')
 keymap.set('n', '<Leader>q', ':qa<cr>')
 keymap.set('n', '<Leader>c', ':close<cr>')
 keymap.set('n', '<Leader>d', ':bp|bd #<cr>')
 keymap.set('n', '<Leader>r', ':e<cr>zz')
-keymap.set('n', '<Leader>w', ':call ToggleQuickFixWindow()<cr>')
+keymap.set('n', '<Leader>w', ':lua ToggleQuickFixWindow()<cr>')
 keymap.set('n', '<Leader>tc', ':tabclose<cr>')
 
 -- Telescope
-keymap.set('n', '<leader>ff', "<cmd>lua require('telescope.builtin').find_files()<cr>")
-keymap.set('n', '<leader>fg', "<cmd>lua require('telescope.builtin').live_grep()<cr>")
-keymap.set('n', '<leader>fb', "<cmd>lua require('telescope.builtin').buffers()<cr>")
-keymap.set('n', '<leader>fh', "<cmd>lua require('telescope.builtin').help_tags()<cr>")
+local tlsc_builtin = require("telescope.builtin")
+keymap.set('n', '<leader>ff', tlsc_builtin.find_files, {})
+keymap.set('n', '<leader>fg', tlsc_builtin.live_grep, {})
+keymap.set('n', '<leader>fb', tlsc_builtin.buffers, {})
+keymap.set('n', '<leader>fh', tlsc_builtin.help_tags, {})
+keymap.set('n', '<leader>fr', tlsc_builtin.oldfiles, {})
 
 -- Use ctrl-[hjkl] to select the active split!
 keymap.set('n', '<silent>', '<c-k> :wincmd k<CR>')
