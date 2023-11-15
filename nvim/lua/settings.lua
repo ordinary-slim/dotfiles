@@ -1,49 +1,62 @@
+-- Make sure to set map leader before plugin manager
 vim.g.mapleader = ' '
 
--- TODO: Switch plugin manager
-vim.cmd [[
-  call plug#begin('~/.config/nvim/plugged')
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
+-- TODO: Refactor hierarchy plugins
+-- TODO: Not load everything
+require("lazy").setup({
+  -- seamless vim/tmux pane navigation
+  {'christoomey/vim-tmux-navigator'},
+  -- Colorschemes
+  {'rafi/awesome-vim-colorschemes'},
+  -- Statusline
+  {'nvim-lualine/lualine.nvim'},
+  -- If you want to have icons in your statusline choose one of these
+  {'nvim-tree/nvim-web-devicons'},
+  -- Plug 'smartpde/telescope-recent-files'
+  -- language server protocols
+  {'neovim/nvim-lspconfig'},
 
-      " gdb inside vim
-      Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh' }
-          let w:nvimgdb_termwin_command = "belowright new"
-      " seamless vim/tmux pane navigation
-      Plug 'christoomey/vim-tmux-navigator'
+  -- autocomplete
+  {'hrsh7th/cmp-nvim-lsp'},
+  {'hrsh7th/cmp-buffer'},
+  {'hrsh7th/cmp-path'},
+  {'hrsh7th/cmp-cmdline'},
+  {'hrsh7th/nvim-cmp'},
 
-      " language server protocols
-      Plug 'neovim/nvim-lspconfig'
+  -- luasnip
+  {'L3MON4D3/LuaSnip'},
+  {'saadparwaiz1/cmp_luasnip'},
 
-      " autocomplete
-      Plug 'hrsh7th/cmp-nvim-lsp'
-      Plug 'hrsh7th/cmp-buffer'
-      Plug 'hrsh7th/cmp-path'
-      Plug 'hrsh7th/cmp-cmdline'
-      Plug 'hrsh7th/nvim-cmp'
+  -- ''premier Vim plugin for Git. Or maybe it's the premier Git plugin for Vim``
+  {'tpope/vim-fugitive'},
 
-      " luasnip
-      Plug 'L3MON4D3/LuaSnip'
-      Plug 'saadparwaiz1/cmp_luasnip'
+  {
+  'nvim-telescope/telescope.nvim', branch = '0.1.x',
+    dependencies = { 'nvim-lua/plenary.nvim' }
+  },
 
-      " Colorschemes
-      Plug 'rafi/awesome-vim-colorschemes'
+  -- gdb inside vim
+  {'sakhnik/nvim-gdb'},
+  --[=====[
+  -- TODO: Restore old options
+  { 'do': ':!./install.sh' }
+  let w:nvimgdb_termwin_command = "belowright new"
+  --]=====]
+})
 
-      " ''premier Vim plugin for Git. Or maybe it's the premier Git plugin for Vim``
-      Plug 'tpope/vim-fugitive'
-
-      " highly extendable fuzzy finder over lists
-      Plug 'nvim-lua/plenary.nvim'
-      Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.3' }
-
-      " Statusline
-      Plug 'nvim-lualine/lualine.nvim'
-      " If you want to have icons in your statusline choose one of these
-      Plug 'nvim-tree/nvim-web-devicons'
-      " Plug 'smartpde/telescope-recent-files'
-
-  call plug#end()
-]]
-
-vim.cmd("colorscheme 256_noir")
+vim.cmd("colorscheme gruvbox")
 vim.opt.mouse = "a"
 vim.opt.hlsearch = false
 vim.opt.nu = true
