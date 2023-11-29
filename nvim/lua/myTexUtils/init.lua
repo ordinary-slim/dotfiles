@@ -19,7 +19,7 @@ function myTexUtils:compileTex()
   vim.cmd("wall") -- write all changed buffers
   print("Compiling ...")
   handle = vim.loop.spawn(self.texC, {
-  args = {self:getTexDriver()},
+  args = {self.texF, self:getTexDriver()},
   },
   function (code, signal) -- on exit callback
     if (code==0) then

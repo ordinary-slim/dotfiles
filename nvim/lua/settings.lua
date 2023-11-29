@@ -19,7 +19,14 @@ require("lazy").setup({
   -- seamless vim/tmux pane navigation
   {'christoomey/vim-tmux-navigator'},
   -- Colorschemes
-  {'rafi/awesome-vim-colorschemes'},
+  {'rafi/awesome-vim-colorschemes',
+    lazy=false,
+    priority = 1000,
+  },
+  {'rebelot/kanagawa.nvim',
+    lazy=false,
+    priority = 1000,
+  },
   -- Statusline
   {'nvim-lualine/lualine.nvim'},
   -- If you want to have icons in your statusline choose one of these
@@ -58,7 +65,7 @@ require("lazy").setup({
   {'folke/zen-mode.nvim'},
 })
 
-vim.cmd("colorscheme gruvbox")
+vim.cmd("colorscheme kanagawa")
 vim.opt.mouse = "a"
 vim.opt.hlsearch = false
 vim.opt.nu = true
