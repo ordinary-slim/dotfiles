@@ -60,7 +60,7 @@ ls.add_snippets("tex", {
     })
   ),
   s(
-  "fig",
+  "figure",
   fmt([[
       \begin{{figure}}[ht]
         \centering

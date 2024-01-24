@@ -14,12 +14,16 @@ function myTexUtils:getTexDriver()
   --]]
   return "main.tex"
 end
-function myTexUtils:compileTex()
+function myTexUtils:compileTex(optionalFlag)
   -- LaTeX compile in background
   vim.cmd("wall") -- write all changed buffers
+  args = {self.texF, self:getTexDriver()}
+  if optionalFlag then
+    table.insert( args, 2, optionalFlag )
+  end
   print("Compiling ...")
   handle = vim.loop.spawn(self.texC, {
-  args = {self.texF, self:getTexDriver()},
+    args = args,
   },
   function (code, signal) -- on exit callback
     if (code==0) then
@@ -47,6 +51,14 @@ function myTexUtils:callBibTex()
     end
   end
   )
+end
+function myTexUtils:longCompileTex()
+  -- Calls tex once, bibtex once, tex twice
+  -- TODO: Debug this
+  compileTex()
+  callBibTex()
+  compileTex()
+  compileTex()
 end
 
 return myTexUtils

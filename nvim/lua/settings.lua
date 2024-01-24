@@ -33,7 +33,11 @@ require("lazy").setup({
   {'nvim-tree/nvim-web-devicons'},
   -- Plug 'smartpde/telescope-recent-files'
   -- language server protocols
-  {'neovim/nvim-lspconfig'},
+  {
+    "williamboman/mason.nvim",
+    "williamboman/mason-lspconfig.nvim",
+    "neovim/nvim-lspconfig",
+  },
 
   -- autocomplete
   {'hrsh7th/cmp-nvim-lsp'},
@@ -63,6 +67,8 @@ require("lazy").setup({
   --]=====]
   -- zen mode
   {'folke/zen-mode.nvim'},
+  -- nvim-treesitter
+  { 'nvim-treesitter/nvim-treesitter'},
 })
 
 vim.cmd("colorscheme kanagawa")

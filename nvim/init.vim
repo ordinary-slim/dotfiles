@@ -17,6 +17,8 @@
 lua << EOF
 require('settings')
 -- Setup nvim_lsp
+require("mason").setup()
+require("mason-lspconfig").setup()
 local mynvim_lsp = require('mynvimlsp')
 -- Setup nvim-cmp
 local mynvimcmp = require('mynvimcmp')
