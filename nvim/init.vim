@@ -68,6 +68,21 @@ function! CSVH(colnr)
 endfunction
 command! -nargs=1 Csv :call CSVH(<args>)
 " }}}
+" WSL clipboard {{{
+" set clipboard+=unnamedplus
+" let g:clipboard = {
+          " \   'name': 'win32yank-wsl',
+          " \   'copy': {
+          " \      '+': 'win32yank.exe -i --crlf',
+          " \      '*': 'win32yank.exe -i --crlf',
+          " \    },
+          " \   'paste': {
+          " \      '+': 'win32yank.exe -o --lf',
+          " \      '*': 'win32yank.exe -o --lf',
+          " \   },
+          " \   'cache_enabled': 0,
+          " \ }
+" }}}
 " Modelines (folds) {{{
 " Must be near (5 lines within) the top/bottom)
 " vim:foldmethod=marker:foldlevel=0

@@ -51,6 +51,38 @@ function myTexUtils:callBibTex()
     end
   end
   )
+  myTexUtils:callBibTexSub()
+end
+function myTexUtils:callBibTexSub()
+  -- bibtex call in background on blx files
+  vim.cmd("wall") -- write all changed buffers
+  local cwdContents = vim.split(vim.fn.glob(vim.fn.getcwd() .. "/*"), '\n', {trimempty=true})
+  local blxFiles = {}
+  for _, cwdItem in pairs(cwdContents) do
+    if (string.find(cwdItem,"blx.aux") ~= nil) then
+      blxFile = vim.fn.fnamemodify(cwdItem,":t")
+      table.insert(blxFiles,blxFile)
+    end
+  end
+  if (next(blxFiles)==nil) then
+    return
+  else
+    print("Calling BibTex on blx files...")
+  end
+
+  for _, blxFile in pairs(blxFiles) do
+    handle = vim.loop.spawn(self.bibtex, {
+    args = {blxFile},
+    },
+    function (code, signal) -- on exit callback
+      if (code==0) then
+        print("Last bibtex blx succeeded")
+      else
+        print("Last bibtex blx FAILED, check logfile")
+      end
+    end
+    )
+  end
 end
 function myTexUtils:longCompileTex()
   -- Calls tex once, bibtex once, tex twice
