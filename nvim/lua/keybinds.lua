@@ -10,7 +10,7 @@ keymap.set('n', '<Leader>tc', ':tabclose<cr>')
 
 -- Telescope
 local tlsc_builtin = require("telescope.builtin")
-keymap.set('n', '<leader>ff', tlsc_builtin.find_files, {})
+keymap.set('n', '<leader>ff', function() tlsc_builtin.find_files({cwd=(vim.fn.expand "%:p:h")}) end, {})
 keymap.set('n', '<leader>fg', tlsc_builtin.live_grep, {})
 keymap.set('n', '<leader>fb', tlsc_builtin.buffers, {})
 keymap.set('n', '<leader>fh', tlsc_builtin.help_tags, {})
