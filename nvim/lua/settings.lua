@@ -74,7 +74,7 @@ require("lazy").setup({
   { 'nvim-treesitter/nvim-treesitter'},
 })
 
-vim.cmd("colorscheme peachpuff")
+vim.cmd("colorscheme scheakur")
 vim.opt.mouse = "a"
 vim.opt.hlsearch = false
 vim.opt.nu = true
