@@ -19,14 +19,11 @@ require("lazy").setup({
   -- seamless vim/tmux pane navigation
   {'christoomey/vim-tmux-navigator'},
   -- Colorschemes
-  {'rafi/awesome-vim-colorschemes',
-    lazy=false,
-    priority = 1000,
-  },
   {'rebelot/kanagawa.nvim',
     lazy=false,
     priority = 1000,
   },
+  {'Mofiqul/vscode.nvim'},
   -- Statusline
   {'nvim-lualine/lualine.nvim'},
   -- If you want to have icons in your statusline choose one of these
@@ -74,7 +71,25 @@ require("lazy").setup({
   { 'nvim-treesitter/nvim-treesitter'},
 })
 
-vim.cmd("colorscheme scheakur")
+
+local vscode_colors = require('vscode.colors').get_colors()
+require('vscode').setup({
+  transparent=true,
+  italic_comments=true,
+  underline_links=true,
+  disable_nvimtree_bg=true,
+  -- Override colors (see ./lua/vscode/colors.lua)
+  color_overrides = {
+    vscLineNumber = '#FFFFFF',
+  },
+  -- Override highlight groups (see ./lua/vscode/theme.lua)
+  group_overrides = {
+      -- this supports the same val table as vim.api.nvim_set_hl
+      -- use colors from this colorscheme by requiring vscode.colors!
+      Cursor = { fg=vscode_colors.vscDarkBlue, bg=vscode_colors.vscLightGreen, bold=true },
+  }
+})
+vim.cmd.colorscheme "vscode"
 vim.opt.mouse = "a"
 vim.opt.hlsearch = false
 vim.opt.nu = true
@@ -98,19 +113,23 @@ vim.g.nvimgdb_config_override = {
   key_step = "ctrl-s",
 }
 
-require("lualine").setup()
+require("lualine").setup({
+  options = {
+    theme = 'vscode',
+  },
+})
 
 -- Utility functions
 function ToggleQuickFixWindow()
-    -- if quickfixwindow is open, close it, and viceversa
-    -- check if quickfixwindow is currently open
-    -- next(A) == nil checks if table A is empty
-    if (next(vim.fn.filter(vim.fn.getwininfo(), 'v:val["quickfix"]')) == nil) then
-        vim.cmd([[copen 6]])
-        vim.cmd([[normal G]])
-    else
-        vim.cmd([[cclose]])
-    end
+  -- if quickfixwindow is open, close it, and viceversa
+  -- check if quickfixwindow is currently open
+  -- next(A) == nil checks if table A is empty
+  if (next(vim.fn.filter(vim.fn.getwininfo(), 'v:val["quickfix"]')) == nil) then
+      vim.cmd([[copen 6]])
+      vim.cmd([[normal G]])
+  else
+      vim.cmd([[cclose]])
+  end
 end
 
 -- TODO: Add folds
