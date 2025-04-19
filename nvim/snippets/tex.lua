@@ -101,6 +101,14 @@ ls.add_snippets("tex", {
       })
   ),
   s(
+  "mbf",
+  fmt([[
+      \mathbf{{{}}}
+      ]], {
+        i(1, "/*bold math*/"),
+      })
+  ),
+  s(
   "ttt",
   fmt([[
       \texttt{{{}}}

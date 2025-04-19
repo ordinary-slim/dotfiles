@@ -69,6 +69,8 @@ require("lazy").setup({
   {'folke/zen-mode.nvim'},
   -- nvim-treesitter
   { 'nvim-treesitter/nvim-treesitter'},
+  -- AI
+  { 'github/copilot.vim' },
 })
 
 
