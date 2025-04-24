@@ -19,11 +19,10 @@ require("lazy").setup({
   -- seamless vim/tmux pane navigation
   {'christoomey/vim-tmux-navigator'},
   -- Colorschemes
-  {'rebelot/kanagawa.nvim',
+  {'folke/tokyonight.nvim',
     lazy=false,
     priority = 1000,
   },
-  {'Mofiqul/vscode.nvim'},
   -- Statusline
   {'nvim-lualine/lualine.nvim'},
   -- If you want to have icons in your statusline choose one of these
@@ -74,24 +73,7 @@ require("lazy").setup({
 })
 
 
-local vscode_colors = require('vscode.colors').get_colors()
-require('vscode').setup({
-  transparent=true,
-  italic_comments=true,
-  underline_links=true,
-  disable_nvimtree_bg=true,
-  -- Override colors (see ./lua/vscode/colors.lua)
-  color_overrides = {
-    vscLineNumber = '#FFFFFF',
-  },
-  -- Override highlight groups (see ./lua/vscode/theme.lua)
-  group_overrides = {
-      -- this supports the same val table as vim.api.nvim_set_hl
-      -- use colors from this colorscheme by requiring vscode.colors!
-      Cursor = { fg=vscode_colors.vscDarkBlue, bg=vscode_colors.vscLightGreen, bold=true },
-  }
-})
-vim.cmd.colorscheme "vscode"
+vim.cmd.colorscheme "tokyonight"
 vim.opt.mouse = "a"
 vim.opt.hlsearch = false
 vim.opt.nu = true
@@ -115,11 +97,15 @@ vim.g.nvimgdb_config_override = {
   key_step = "ctrl-s",
 }
 
-require("lualine").setup({
-  options = {
-    theme = 'vscode',
-  },
+require("lualine").setup()
+
+-- Copilot
+vim.keymap.set('i', '<C-J>', 'copilot#Accept("\\<CR>")', {
+  expr = true,
+  replace_keycodes = false
 })
+vim.g.copilot_no_tab_map = true
+
 
 -- Utility functions
 function ToggleQuickFixWindow()
