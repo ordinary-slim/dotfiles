@@ -1,0 +1,2 @@
+- [x]  Pure lua init.vim
+- [ ] Divide settings into options and plugin loading

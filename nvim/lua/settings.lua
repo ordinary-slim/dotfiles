@@ -1,6 +1,3 @@
--- Make sure to set map leader before plugin manager
-vim.g.mapleader = ' '
-
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -15,65 +12,10 @@ end
 vim.opt.rtp:prepend(lazypath)
 -- TODO: Refactor hierarchy plugins
 -- TODO: Not load everything
-require("lazy").setup({
-  -- seamless vim/tmux pane navigation
-  {'christoomey/vim-tmux-navigator'},
-  -- Colorschemes
-  {'folke/tokyonight.nvim',
-    lazy=false,
-    priority = 1000,
-  },
-  -- Statusline
-  {'nvim-lualine/lualine.nvim'},
-  -- If you want to have icons in your statusline choose one of these
-  {'nvim-tree/nvim-web-devicons'},
-  -- Plug 'smartpde/telescope-recent-files'
-  -- language server protocols
-  {
-    "williamboman/mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
-    "neovim/nvim-lspconfig",
-  },
-
-  -- autocomplete
-  {'hrsh7th/nvim-cmp',
-    dependencies = {
-      'hrsh7th/cmp-nvim-lsp',
-      'hrsh7th/cmp-buffer',
-      'hrsh7th/cmp-path',
-      'hrsh7th/cmp-cmdline',
-    },
-  },
-
-  -- luasnip
-  {'L3MON4D3/LuaSnip'},
-  {'saadparwaiz1/cmp_luasnip'},
-
-  -- ''premier Vim plugin for Git. Or maybe it's the premier Git plugin for Vim``
-  {'tpope/vim-fugitive'},
-
-  {
-  'nvim-telescope/telescope.nvim', branch = '0.1.x',
-    dependencies = { 'nvim-lua/plenary.nvim' }
-  },
-
-  -- gdb inside vim
-  {'sakhnik/nvim-gdb'},
-  --[=====[
-  -- TODO: Restore old options
-  { 'do': ':!./install.sh' }
-  let w:nvimgdb_termwin_command = "belowright new"
-  --]=====]
-  -- zen mode
-  {'folke/zen-mode.nvim'},
-  -- nvim-treesitter
-  { 'nvim-treesitter/nvim-treesitter'},
-  -- AI
-  { 'github/copilot.vim' },
-})
+require("lazy").setup({ import = "plugins" })
 
 
-vim.cmd.colorscheme "tokyonight"
+vim.cmd.colorscheme('everforest')
 vim.opt.mouse = "a"
 vim.opt.hlsearch = false
 vim.opt.nu = true
@@ -119,5 +61,3 @@ function ToggleQuickFixWindow()
       vim.cmd([[cclose]])
   end
 end
-
--- TODO: Add folds

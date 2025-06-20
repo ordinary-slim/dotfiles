@@ -136,4 +136,10 @@ ls.add_snippets("tex", {
         ri(1),
       })
   ),
+  s(
+  "->",
+  fmt([[
+      $\rightarrow$ 
+  ]], {})
+  ),
 })
