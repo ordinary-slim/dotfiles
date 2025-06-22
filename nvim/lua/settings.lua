@@ -1,37 +1,30 @@
+local vg = vim.g
+local vb = vim.bo
+local vw = vim.wo
+local vo = vim.opt
 
 vim.cmd.colorscheme('everforest')
-vim.opt.mouse = "a"
-vim.opt.hlsearch = false
-vim.opt.nu = true
-vim.opt.rnu = true
-vim.opt.hidden = true
-vim.opt.syntax = "on" -- syntax on
--- Statusline
-vim.opt.laststatus = 2
-vim.cmd("set completeopt=menu,menuone,noselect")
+vo.mouse = "a"
+vo.nu = true
+vo.rnu = true
+vo.hlsearch = false
+vo.hidden = true
+vo.syntax = "on" -- syntax on
+
+-- Sets how Neovim will display certain whitespace characters in the editor
+vo.list = true
+vo.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
+
 -- Tabs
-vim.opt.autoindent = true
-vim.opt.tabstop = 2
-vim.opt.shiftwidth = 2
-vim.opt.expandtab = true
+vo.autoindent = true
+vo.tabstop = 2
+vo.shiftwidth = 2
+vo.expandtab = true
+vo.splitright = true -- Put new windows right of current
+vo.termguicolors = true -- True color support
 
-vim.g.fortran_have_tabs = 1
-vim.g.tex_flavor= "tex" -- treat plaintex as tex
-
--- Plugin settings
-vim.g.nvimgdb_config_override = {
-  key_step = "ctrl-s",
-}
-
-require("lualine").setup()
-
--- Copilot
-vim.keymap.set('i', '<C-J>', 'copilot#Accept("\\<CR>")', {
-  expr = true,
-  replace_keycodes = false
-})
-vim.g.copilot_no_tab_map = true
-
+vg.fortran_have_tabs = 1
+vg.tex_flavor= "tex" -- treat plaintex as tex
 
 -- Utility functions
 function ToggleQuickFixWindow()

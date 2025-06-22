@@ -1,6 +1,7 @@
 -- Set mapleader before loading any plugins
 vim.g.mapleader = ' '
 
+-- Lazy (plugin manager) setup
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -17,8 +18,9 @@ vim.opt.rtp:prepend(lazypath)
 -- TODO: Not load everything
 require("lazy").setup({ import = "plugins" })
 
+-- Generaly settings
 require('settings')
--- Setup nvim_lsp
+-- Setup LSPs
 require("mason").setup()
 require("mason-lspconfig").setup()
 local mynvim_lsp = require('mynvimlsp')
@@ -28,4 +30,7 @@ local mynvimcmp = require('mynvimcmp')
 local myluasnip = require('myluasnip')
 -- My tex utils (background compilation)
 local myTexUtils = require('myTexUtils')
+-- Shortcuts
 require('keybinds')
+-- Setup statusline
+require("lualine").setup()
