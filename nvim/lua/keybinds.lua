@@ -5,7 +5,7 @@ keymap.set('n', '<Leader>q', ':qa<cr>')
 keymap.set('n', '<Leader>c', ':close<cr>')
 keymap.set('n', '<Leader>d', ':bp|bd #<cr>')
 keymap.set('n', '<Leader>r', ':e<cr>zz')
-keymap.set('n', '<Leader>w', ':lua ToggleQuickFixWindow()<cr>')
+keymap.set('n', '<Leader>w', ':lua common.ToggleQuickFixWindow()<cr>')
 keymap.set('n', '<Leader>tc', ':tabclose<cr>')
 
 -- Telescope
@@ -30,8 +30,3 @@ keymap.set('n', '<BS>', '<c-^>')
 -- navigate quickfix list
 keymap.set('n', ']q', ':cnext<cr>')
 keymap.set('n', '[q', ':cprev<cr>')
-
--- TO CHANGE: not overwriting content of register p
--- insert new line and come back at exact position
-keymap.set('n', '<cr>', ':normal mpo<Esc>`p')
-

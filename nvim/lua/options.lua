@@ -25,16 +25,3 @@ vo.termguicolors = true -- True color support
 
 vg.fortran_have_tabs = 1
 vg.tex_flavor= "tex" -- treat plaintex as tex
-
--- Utility functions
-function ToggleQuickFixWindow()
-  -- if quickfixwindow is open, close it, and viceversa
-  -- check if quickfixwindow is currently open
-  -- next(A) == nil checks if table A is empty
-  if (next(vim.fn.filter(vim.fn.getwininfo(), 'v:val["quickfix"]')) == nil) then
-      vim.cmd([[copen 6]])
-      vim.cmd([[normal G]])
-  else
-      vim.cmd([[cclose]])
-  end
-end

@@ -7,7 +7,7 @@ return
   },
   keys = {
     {
-      "<C-a>",
+      "<C-space>",
       "<cmd>CodeCompanionActions<CR>",
       desc = "Open the action palette",
       mode = { "n", "v" },

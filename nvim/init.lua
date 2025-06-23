@@ -15,12 +15,12 @@ if not vim.loop.fs_stat(lazypath) then
   })
 end
 vim.opt.rtp:prepend(lazypath)
--- TODO: Refactor hierarchy plugins
--- TODO: Not load everything
+
+_G.common = require("common") -- define global variables and utility functions
 require("lazy").setup({ import = "plugins" })
 
 -- Generaly settings
-require('settings')
+require('options')
 -- Setup LSPs
 require("mason").setup()
 require("mason-lspconfig").setup()
@@ -29,8 +29,6 @@ local mynvim_lsp = require('mynvimlsp')
 local mynvimcmp = require('mynvimcmp')
 -- Setup LuaSnip
 local myluasnip = require('myluasnip')
--- My tex utils (background compilation)
-local myTexUtils = require('myTexUtils')
 -- Shortcuts
 require('keybinds')
 -- Setup statusline
