@@ -4,7 +4,8 @@ return {
     config = function()
       vim.g.vimtex_compiler_method = "latexmk"
       vim.g.vimtex_complete_enabled = false
-      vim.g.vimtex_quickfix_enabled = false
+      vim.g.vimtex_quickfix_enabled = true
+      vim.g.vimtex_quickfix_mode = 0
       vim.g.vimtex_syntax_conceal_disable = true
 
       -- Use the following command for inverse search on Linux / macOS

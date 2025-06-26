@@ -14,7 +14,7 @@ function M.ToggleQuickFixWindow()
   -- next(A) == nil checks if table A is empty
   if (next(vim.fn.filter(vim.fn.getwininfo(), 'v:val["quickfix"]')) == nil) then
       vim.cmd([[copen 6]])
-      vim.cmd([[normal G]])
+      vim.cmd([[normal gg]])
   else
       vim.cmd([[cclose]])
   end
