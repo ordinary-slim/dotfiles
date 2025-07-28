@@ -6,7 +6,7 @@ local i = ls.insert_node
 local f = ls.function_node
 local d = ls.dynamic_node
 local c = ls.choice_node
-local ri = require('luasnip_utils').ri
+local rep = require('luasnip.extras').rep
 
 ls.add_snippets("tex", {
 	s(
@@ -18,7 +18,7 @@ ls.add_snippets("tex", {
         ]], {
 		i(1, "environment"),
 		i(2, "/* LaTeX code */"),
-		ri(1),
+		rep(1),
 		})
 	),
 	s(
@@ -133,7 +133,7 @@ ls.add_snippets("tex", {
       ]], {
         i(1, "equation*"),
         i(2, ""),
-        ri(1),
+        rep(1),
       })
   ),
   s(

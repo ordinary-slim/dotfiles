@@ -24,8 +24,6 @@ require('options')
 -- Setup LSPs
 require("mason").setup()
 require("mason-lspconfig").setup()
--- Setup LuaSnip
-local myluasnip = require('myluasnip')
 -- Shortcuts
 require('keybinds')
 -- Setup statusline

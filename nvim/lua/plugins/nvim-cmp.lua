@@ -1,10 +1,59 @@
 return {
+  {
+    'L3MON4D3/LuaSnip',
+    config = function()
+      local ls = require("luasnip")
+
+      -- lazy load by filename / path in lua and snipmate formats
+      require("luasnip.loaders.from_lua").load({paths = "~/.config/nvim/snippets"})
+      require("luasnip.loaders.from_snipmate").load({paths = "~/.config/nvim/snippets"})
+
+      -- Virtual Text{{{
+      local types = require("luasnip.util.types")
+      ls.config.set_config({
+        history = false, --keep around last snippet local to jump back
+        updateevents = "TextChanged,TextChangedI", --update changes as you type
+        enable_autosnippets = true,
+        ext_opts = {
+          [types.choiceNode] = {
+            active = {
+              virt_text = { { "●", "GruvboxOrange" } },
+            },
+          },
+          -- [types.insertNode] = {
+          -- 	active = {
+          -- 		virt_text = { { "●", "GruvboxBlue" } },
+          -- 	},
+          -- },
+        },
+      }) --}}}
+
+      function leave_snippet()
+          if
+              ((vim.v.event.old_mode == 's' and vim.v.event.new_mode == 'n') or vim.v.event.old_mode == 'i')
+              and require('luasnip').session.current_nodes[vim.api.nvim_get_current_buf()]
+              and not require('luasnip').session.jump_active
+          then
+              require('luasnip').unlink_current()
+          end
+      end
+
+      -- stop snippets when you leave to normal mode
+      vim.api.nvim_command([[
+          autocmd ModeChanged * lua leave_snippet()
+      ]])
+    end,
+  },
   {'hrsh7th/nvim-cmp',
     dependencies = {
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-path',
       'hrsh7th/cmp-cmdline',
+      {
+        'saadparwaiz1/cmp_luasnip',
+        dependencies = { 'L3MON4D3/LuaSnip' },
+      },
     },
     config = function()
       local cmp = require'cmp'
@@ -98,4 +147,3 @@ return {
     end,
   },
 }
-
