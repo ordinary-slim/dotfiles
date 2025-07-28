@@ -3,7 +3,7 @@ local vb = vim.bo
 local vw = vim.wo
 local vo = vim.opt
 
-vim.cmd([[colorscheme vaporwave]])
+vim.cmd([[colorscheme default]])
 vo.mouse = "a"
 vo.nu = true
 vo.rnu = true
@@ -20,6 +20,7 @@ vo.autoindent = true
 vo.tabstop = 2
 vo.shiftwidth = 2
 vo.expandtab = true
+
 vo.splitright = true -- Put new windows right of current
 vo.termguicolors = true -- True color support
 
