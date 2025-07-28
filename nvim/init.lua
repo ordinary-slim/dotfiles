@@ -24,9 +24,6 @@ require('options')
 -- Setup LSPs
 require("mason").setup()
 require("mason-lspconfig").setup()
-local mynvim_lsp = require('mynvimlsp')
--- Setup nvim-cmp
-local mynvimcmp = require('mynvimcmp')
 -- Setup LuaSnip
 local myluasnip = require('myluasnip')
 -- Shortcuts
