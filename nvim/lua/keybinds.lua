@@ -9,6 +9,7 @@ keymap.set('n', '<Leader>w', ':lua common.ToggleQuickFixWindow()<cr>')
 keymap.set('n', '<Leader>tc', ':tabclose<cr>')
 
 -- Telescope
+-- TODO: Move to plugin config file
 local tlsc_builtin = require("telescope.builtin")
 keymap.set('n', '<leader>ff', function() tlsc_builtin.find_files({cwd=(vim.fn.expand "%:p:h")}) end, {})
 keymap.set('n', '<leader>fg', tlsc_builtin.live_grep, {})
