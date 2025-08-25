@@ -4,7 +4,7 @@ return {
     event = "InsertEnter",
     keys = {
       {
-        "<leader>s",
+        "<M-s>",
         ':lua require("copilot.suggestion").toggle_auto_trigger()<cr>',
         mode = {"n"},
       },
