@@ -5,8 +5,11 @@ return {
     keys = {
       {
         "<M-s>",
-        ':lua require("copilot.suggestion").toggle_auto_trigger()<cr>',
-        mode = {"n"},
+        function()
+          require("copilot.suggestion").toggle_auto_trigger()
+          print("Copilot suggestions " .. (vim.b.copilot_suggestion_auto_trigger and "enabled" or "disabled"))
+        end,
+        mode = {"n", "i"},
       },
     },
     config = function()
