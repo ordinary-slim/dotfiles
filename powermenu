@@ -1,16 +1,16 @@
 #!/usr/bin/bash
-lock="🔒 Lock"
-suspend="🌙 Suspend"
-reboot="🔄 Reboot"
-poweroff="💀 Poweroff"
-logout="🚪 Logout"
-entries="$lock\n$suspend\n$reboot\n$poweroff\n$logout"
+lock_entry="🔒\tLock"
+suspend_entry="🌙\tSuspend"
+reboot_entry="🔄\tReboot"
+poweroff_entry="💀\tPoweroff"
+logout_entry="🚪\tLogout"
+entries="$lock_entry\n$suspend_entry\n$reboot_entry\n$poweroff_entry\n$logout_entry"
 
-choice=$(printf "%b" "$entries" | rofi -dmenu -p "Power:")
+choice=$(printf "%b" "$entries" | rofi -dmenu -p "Power:" -i -format i -matching fuzzy)
 case "$choice" in
-  $lock)     hyprlock ;;
-  $suspend)  systemctl suspend ;;
-  $reboot)   systemctl reboot ;;
-  $poweroff) systemctl poweroff ;;
-  $logout)   hyprctl dispatch exit ;;
+  0) hyprlock ;;
+  1) systemctl suspend ;;
+  2) systemctl reboot ;;
+  3) systemctl poweroff ;;
+  4) hyprctl dispatch exit ;;
 esac
