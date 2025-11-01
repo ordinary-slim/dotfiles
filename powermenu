@@ -1,0 +1,16 @@
+#!/usr/bin/bash
+lock="🔒 Lock"
+suspend="🌙 Suspend"
+reboot="🔄 Reboot"
+poweroff="💀 Poweroff"
+logout="🚪 Logout"
+entries="$lock\n$suspend\n$reboot\n$poweroff\n$logout"
+
+choice=$(printf "%b" "$entries" | rofi -dmenu -p "Power:")
+case "$choice" in
+  $lock)     hyprlock ;;
+  $suspend)  systemctl suspend ;;
+  $reboot)   systemctl reboot ;;
+  $poweroff) systemctl poweroff ;;
+  $logout)   hyprctl dispatch exit ;;
+esac
