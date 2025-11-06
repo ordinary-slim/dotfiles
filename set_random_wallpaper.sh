@@ -1,8 +1,5 @@
 #!/bin/bash
 
-
-sleep 0.05 # race condition startup hyprpaper
-
 # Directory containing wallpapers
 directory="$HOME/wallpapers"
 
