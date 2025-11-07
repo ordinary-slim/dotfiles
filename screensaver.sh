@@ -1,11 +1,19 @@
 #!/usr/bin/env bash
 
-loop_screensaver() {
-  exit_screensaver() {
-    pkill -f pipes.sh
-    pkill -f "ghostty --class=Screensaver"
+exit_screensaver() {
+  pkill -f pipes.sh
+  pkill -f "ghostty --class=Screensaver"
+}
 
-  }
+is_running() {
+  if pgrep -f pipes.sh >/dev/null; then
+    return 0
+  else
+    return 1
+  fi
+}
+
+loop_screensaver() {
   trap exit_screensaver SIGINT SIGTERM SIGHUP SIGQUIT
   pipes.sh </dev/null &
   while true; do
@@ -17,7 +25,9 @@ done
 }
 
 launch_screensaver() {
-  pgrep -f "ghostty --fullscreen --command=pipes.sh" && exit 0
+  if is_running; then
+    exit 0
+  fi
 
   # TODO: Using both jq and awk
   monitors=$(hyprctl monitors | awk '/Monitor/{print $2}')
