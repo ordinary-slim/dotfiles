@@ -1,8 +1,11 @@
 #!/usr/bin/env bash
 
+# TODO: Investigate high CPU usage
+
 exit_screensaver() {
   pkill -f pipes.sh
   pkill -f "ghostty --class=Screensaver"
+  exit 0
 }
 
 is_running() {
@@ -15,13 +18,13 @@ is_running() {
 
 loop_screensaver() {
   trap exit_screensaver SIGINT SIGTERM SIGHUP SIGQUIT
-  pipes.sh </dev/null &
+  pipes.sh </dev/null 2>/dev/null &
   while true; do
   # -r: raw, -s: silent (no echo), -n1: 1 char, -t 0.1: small timeout
-  if read -n 1 -t 3; then
-    exit_screensaver
-  fi
-done
+    if read -n 1 -t 3; then
+      exit_screensaver
+    fi
+  done
 }
 
 launch_screensaver() {
