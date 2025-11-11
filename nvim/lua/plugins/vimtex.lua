@@ -2,35 +2,21 @@ return {
   {
     "lervag/vimtex",
     config = function()
-      vim.g.vimtex_compiler_method = "latexmk"
       vim.g.vimtex_complete_enabled = false
-      vim.g.vimtex_quickfix_enabled = true
       vim.g.vimtex_quickfix_mode = 0
       vim.g.vimtex_syntax_conceal_disable = true
 
-      -- Use the following command for inverse search on Linux / macOS
-      --   nvim --headless -c "VimtexInverseSearch %l '%f'"
-      -- and the following on Windows (to reduce CMD popping)
-      --   cmd /c start /min "" nvim --headless -c "VimtexInverseSearch %l '%f'"
-
-      -- \ll to toggle interactive compilation (updates / launches PDF viewer on saved change)
-      -- \lk to interrupt compilation
-      -- \lc to clean files
-      -- \lo to inspect output
-      -- \li to see compile commands
-
-      
       -- Live compilation
       vim.g.vimtex_compiler_latexmk = {
-        build_dir = "",
+        aux_dir = 'build',
+        out_dir = 'build',
+        continuous = 1,
         options = {
-          "-pdf",
           "-shell-escape",
           "-verbose",
           "-file-line-error",
           "-interaction=nonstopmode",
           "-synctex=1",
-          "-f",
         },
       }
 

@@ -7,6 +7,9 @@ keymap.set('n', '<Leader>d', ':bp|bd #<cr>')
 keymap.set('n', '<Leader>r', ':e<cr>zz')
 keymap.set('n', '<Leader>w', ':lua common.ToggleQuickFixWindow()<cr>')
 keymap.set('n', '<Leader>tc', ':tabclose<cr>')
+-- <CTRL-]> (go to tag) is buggy in QWERTY keyboard. Spanish keyboard equivalent is <CTRL-5>
+-- See https://stackoverflow.com/questions/6932702/how-do-i-type-ctrl-on-a-qwertz-keyboard-in-order-to-jump-to-a-tag-with-vim
+-- keymap.set('n', '<Leader>]', '<c-]>')
 
 -- Telescope
 -- TODO: Move to plugin config file
