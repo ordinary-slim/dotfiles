@@ -72,6 +72,10 @@ button:hover {
     background-color: #eb4d4b;
 }
 
+#workspaces button.visible {
+    background-color: #2980b9;
+}
+
 #workspaces button.active {
     background-color: #228B22;
 }
