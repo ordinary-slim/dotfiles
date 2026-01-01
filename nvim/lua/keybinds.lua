@@ -1,3 +1,4 @@
+-- NOTE: Most keybind related plugins are in their respective plugin files
 local keymap = vim.keymap
 
 keymap.set('n', '<Leader>w', ':wa<cr>')
@@ -19,12 +20,6 @@ keymap.set('n', '<leader>fg', tlsc_builtin.live_grep, {})
 keymap.set('n', '<leader>fb', tlsc_builtin.buffers, {})
 keymap.set('n', '<leader>fh', tlsc_builtin.help_tags, {})
 keymap.set('n', '<leader>fr', tlsc_builtin.oldfiles, {})
-
--- Use ctrl-[hjkl] to select the active split!
-keymap.set('n', '<silent>', '<c-k> :wincmd k<CR>')
-keymap.set('n', '<silent>', '<c-j> :wincmd j<CR>')
-keymap.set('n', '<silent>', '<c-h> :wincmd h<CR>')
-keymap.set('n', '<silent>', '<c-l> :wincmd l<CR>')
 
 -- navigate buffer list
 keymap.set('n', '<c-n>', ':bn<cr>')
