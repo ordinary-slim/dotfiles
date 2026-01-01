@@ -4,15 +4,17 @@ return {
     -- Recommended for `ask()` and `select()`.
     -- Required for `snacks` provider.
     ---@module 'snacks' <- Loads `snacks.nvim` types for configuration intellisense.
-    { "folke/snacks.nvim", opts = { input = {}, picker = {}, terminal = {} } },
+    { "folke/snacks.nvim", opts = { input = {}, picker = {}, terminal = {start_insert = false, auto_insert = false} } },
   },
   config = function()
     ---@type opencode.Opts
     vim.g.opencode_opts = {
       provider = {
-        enabled = "tmux",
-        tmux = {
-          -- ...
+        enabled = "snacks",
+        snacks = {
+          terminal = {
+            --
+          }
         },
       },
     }

@@ -26,3 +26,7 @@ palette = 12=#807d7c
 palette = 13=#d6d5d4
 palette = 14=#cdab53
 palette = 15=#f7f7f7
+
+
+keybind = ctrl+enter=unbind
+keybind = shift+enter=text:\n
