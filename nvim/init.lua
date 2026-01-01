@@ -1,6 +1,6 @@
 -- Set mapleader before loading any plugins
 vim.g.mapleader = ' '
-vim.g.maplocalleader = "\\"
+vim.g.maplocalleader = ";"
 
 -- Lazy (plugin manager) setup
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
