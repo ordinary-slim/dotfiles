@@ -28,7 +28,10 @@ loop_screensaver() {
 
   while true; do
     effect=$(tte 2>&1 | grep -oP '{\K[^}]+' | tr ',' ' ' | tr ' ' '\n' | sed -n '/^beams$/,$p' | sort -u | shuf -n1)
-    echo "$LOGO" | tte --frame-rate 240 --canvas-width 0 --canvas-height $(($(tput lines) - 2)) --anchor-canvas c --anchor-text c "$effect" &
+    tte -i ~/.config/flare.txt \
+      --frame-rate 120 --canvas-width 0 --canvas-height 0 --reuse-canvas --anchor-canvas c --anchor-text c\
+      --random-effect --exclude-effects dev_worm \
+      --no-eol --no-restore-cursor &
     while pgrep -x tte >/dev/null; do
       if read -rs -n 1 -t 3; then
         exit_screensaver
