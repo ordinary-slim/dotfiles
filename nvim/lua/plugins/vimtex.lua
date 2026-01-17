@@ -10,6 +10,7 @@ return {
       vim.g.vimtex_compiler_latexmk = {
         aux_dir = 'build',
         out_dir = 'build',
+        callback = 1,
         continuous = 1,
         options = {
           "-shell-escape",
@@ -26,7 +27,21 @@ return {
         vim.g.vimtex_view_general_viewer = "SumatraPDF"
         vim.g.vimtex_view_general_options = "-reuse-instance -forward-search @tex @line @pdf"
       end
+      vim.api.nvim_create_augroup('VimtexPostCompile', { clear = true })
+
+      vim.api.nvim_create_autocmd('User', {
+        group = 'VimtexPostCompile',
+        pattern = 'VimtexEventCompileSuccess',
+        callback = function()
+          local script = 'publish.sh'
+          if vim.fn.filereadable(script) == 1 then
+            vim.fn.jobstart({ 'bash', script })
+          end
+        end,
+      })
+
     end,
+
   },
 }
 
