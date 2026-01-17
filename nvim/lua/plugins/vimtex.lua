@@ -29,13 +29,32 @@ return {
       end
       vim.api.nvim_create_augroup('VimtexPostCompile', { clear = true })
 
+      vim.g.beamer_reveal_busy = false
+
       vim.api.nvim_create_autocmd('User', {
         group = 'VimtexPostCompile',
         pattern = 'VimtexEventCompileSuccess',
         callback = function()
           local script = 'publish.sh'
           if vim.fn.filereadable(script) == 1 then
-            vim.fn.jobstart({ 'bash', script })
+            -- Don't start if it's working somewhere
+            if vim.g.beamer_reveal_busy then
+              vim.notify("beamer-reveal already working.", vim.log.levels.INFO)
+              return
+            end
+
+            -- Start it
+            vim.g.beamer_reveal_busy = true
+            vim.fn.jobstart({'bash', script}, {
+              on_exit = function(job_id, exit_code, event_type)
+                vim.g.beamer_reveal_busy = false
+                if exit_code == 0 then
+                  vim.notify("Generated HTML", vim.log.levels.INFO)
+                else
+                  vim.notify(string.format("Failed to generate HTML (code %d)", exit_code), vim.log.levels.ERROR)
+                end
+              end,
+            })
           end
         end,
       })
