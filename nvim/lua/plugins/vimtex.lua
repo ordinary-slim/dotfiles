@@ -46,6 +46,24 @@ return {
             -- Start it
             vim.g.beamer_reveal_busy = true
             vim.fn.jobstart({'bash', script}, {
+              pty=true,
+              -- on_stdout = function(_, data, _)
+              --   if not data then return end
+              --   for _, line in ipairs(data) do
+              --     if line ~= "" then
+              --       print("[stdout]", line)
+              --     end
+              --   end
+              -- end,
+              --
+              -- on_stderr = function(_, data, _)
+              --   if not data then return end
+              --   for _, line in ipairs(data) do
+              --     if line ~= "" then
+              --       print("[stderr]", line)
+              --     end
+              --   end
+              -- end,
               on_exit = function(job_id, exit_code, event_type)
                 vim.g.beamer_reveal_busy = false
                 if exit_code == 0 then

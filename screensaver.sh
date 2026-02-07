@@ -28,8 +28,8 @@ loop_screensaver() {
 
   while true; do
     tte -i ~/.config/flare.txt \
-      --frame-rate 120 --canvas-width 0 --canvas-height 0 --reuse-canvas --anchor-canvas c --anchor-text c\
-      --random-effect --include-effects thunderstorm burn waves vhstape laseretch \
+      --frame-rate 60 --canvas-width 0 --canvas-height 0 --reuse-canvas --anchor-canvas c --anchor-text c\
+      --random-effect --include-effects thunderstorm laseretch \
       --no-eol --no-restore-cursor &
     while pgrep -x tte >/dev/null; do
       if read -rs -n 1 -t 3; then
