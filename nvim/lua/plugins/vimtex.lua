@@ -22,7 +22,7 @@ return {
       }
 
       if common.is_unix then
-        vim.g.vimtex_view_method = "zathura"
+        vim.g.vimtex_view_method = "sioyek"
       elseif common.is_windows then
         vim.g.vimtex_view_general_viewer = "SumatraPDF"
         vim.g.vimtex_view_general_options = "-reuse-instance -forward-search @tex @line @pdf"

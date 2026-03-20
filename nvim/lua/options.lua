@@ -3,7 +3,7 @@ local vb = vim.bo
 local vw = vim.wo
 local vo = vim.opt
 
-vim.cmd([[colorscheme catppuccin-mocha]])
+vim.cmd([[colorscheme default]])
 vo.mouse = "a"
 vo.nu = true
 vo.rnu = true

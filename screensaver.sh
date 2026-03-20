@@ -10,6 +10,16 @@ exit_screensaver() {
   exit 0
 }
 
+toggle_screensaver() {
+  if [ -f /tmp/no_screensaver ]; then
+    rm /tmp/no_screensaver
+    notify-send -t 5000 "Screensaver enabled"
+  else
+    touch /tmp/no_screensaver
+    notify-send -t 5000 "Screensaver disabled"
+  fi
+}
+
 is_running() {
   if pgrep -f "ghostty --class=Screensaver"; then
     return 0
@@ -40,7 +50,7 @@ loop_screensaver() {
 }
 
 launch_screensaver() {
-  if is_running; then
+  if is_running || [ -f /tmp/no_screensaver ]; then
     exit 0
   fi
 
@@ -51,7 +61,7 @@ launch_screensaver() {
   for monitor in $monitors; do
     # Focus the monitor so the new window opens there
     hyprctl dispatch focusmonitor "$monitor"
-    hyprctl dispatch exec 'ghostty --class=Screensaver --title=Screensaver --fullscreen --cursor-color=black --command="$HOME/.config/screensaver.sh loop_screensaver"'
+    hyprctl dispatch exec 'ghostty --class=Screensaver --title=Screensaver --fullscreen=true --cursor-color=black --command="$HOME/.config/screensaver.sh loop_screensaver"'
   done
 
   hyprctl dispatch focusmonitor $focused
