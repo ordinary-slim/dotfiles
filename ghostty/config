@@ -5,5 +5,7 @@ clipboard-write = allow
 copy-on-select = true
 theme = Apple System Colors
 
+shell-integration-features = no-cursor
+
 keybind = ctrl+enter=unbind
 keybind = shift+enter=text:\n
