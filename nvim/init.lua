@@ -19,6 +19,7 @@ vim.opt.rtp:prepend(lazypath)
 _G.common = require("common") -- define global variables and utility functions
 require("lazy").setup({ import = "plugins" })
 
+require('extra-filetypes')
 -- Generaly settings
 require('options')
 -- Setup LSPs
