@@ -26,3 +26,5 @@ vo.termguicolors = true -- True color support
 
 vg.fortran_have_tabs = 1
 vg.tex_flavor= "tex" -- treat plaintex as tex
+
+vim.o.laststatus = 3

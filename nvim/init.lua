@@ -17,15 +17,8 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 _G.common = require("common") -- define global variables and utility functions
-require("lazy").setup({ import = "plugins" })
+require('options') -- general settings
+require('extra-filetypes') -- extra syntax highlighting
+require('base-keybinds') -- non-plugin keybinds
 
-require('extra-filetypes')
--- Generaly settings
-require('options')
--- Setup LSPs
-require("mason").setup()
-require("mason-lspconfig").setup()
--- Shortcuts
-require('keybinds')
--- Setup statusline
-require("lualine").setup()
+require("lazy").setup({ import = "plugins" })

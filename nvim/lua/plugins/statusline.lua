@@ -1,8 +1,10 @@
 return {
   {'nvim-lualine/lualine.nvim',
     dependencies = {'nvim-tree/nvim-web-devicons', opt = true},
+    enabled = function()
+      return not vim.g.started_by_firenvim
+    end,
     config = function()
-      vim.opt.laststatus = 2
       vim.cmd("set completeopt=menu,menuone,noselect")
       require('lualine').setup {
         options = {
