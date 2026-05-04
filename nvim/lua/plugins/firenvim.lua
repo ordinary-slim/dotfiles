@@ -8,7 +8,7 @@ return {
   config = function()
     if vim.g.started_by_firenvim then
       -- Firenvim specific settings
-      vim.o.guifont = "Fira Mono Retina:h14"
+      vim.o.guifont = "Fira Mono Retina:h12"
       vim.o.linespace = 0
       vim.o.laststatus = 0
       vim.o.number = false
