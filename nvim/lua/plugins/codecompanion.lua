@@ -19,8 +19,8 @@ return
       mode = { "n", "v" },
     },
     {
-      "<localleader>y",
-      "<cmd>codecompanionchat add<cr>",
+      "<localleader>a",
+      "<cmd>CodeCompanionChat Add<cr>",
       desc = "add code to a chat buffer",
       mode = { "v" },
     },
