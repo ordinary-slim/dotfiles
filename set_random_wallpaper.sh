@@ -1,5 +1,7 @@
 #!/bin/bash
 
+pidof hyprpaper || hyprpaper &
+
 # Directory containing wallpapers
 directory="$HOME/wallpapers"
 
