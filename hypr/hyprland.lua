@@ -232,15 +232,20 @@ hl.bind(mainMod .. " + BACKSPACE", hl.dsp.exec_cmd(powermenu))
 
 
 -- Move focus with mainMod + arrow keys
-hl.bind(mainMod .. " + h",  hl.dsp.focus({ direction = "left" }))
+hl.bind(mainMod .. " + h", hl.dsp.focus({ direction = "left" }))
 hl.bind(mainMod .. " + l", hl.dsp.focus({ direction = "right" }))
-hl.bind(mainMod .. " + k",    hl.dsp.focus({ direction = "up" }))
-hl.bind(mainMod .. " + j",  hl.dsp.focus({ direction = "down" }))
+hl.bind(mainMod .. " + k", hl.dsp.focus({ direction = "up" }))
+hl.bind(mainMod .. " + j", hl.dsp.focus({ direction = "down" }))
 
-hl.bind(mainMod .. " + CTRL + h", hl.dsp.window.resize({ x = -20, y = 0 }))
-hl.bind(mainMod .. " + CTRL + l", hl.dsp.window.resize({ x = 20, y = 0 }))
-hl.bind(mainMod .. " + CTRL + k", hl.dsp.window.resize({ x = 0, y = -20 }))
-hl.bind(mainMod .. " + CTRL + j", hl.dsp.window.resize({ x = 0, y = 20 }))
+hl.bind(mainMod .. " + ALT + h", hl.dsp.window.move({ direction = "left" }))
+hl.bind(mainMod .. " + ALT + l", hl.dsp.window.move({ direction = "right" }))
+hl.bind(mainMod .. " + ALT + k", hl.dsp.window.move({ direction = "up" }))
+hl.bind(mainMod .. " + ALT + j", hl.dsp.window.move({ direction = "down" }))
+
+hl.bind(mainMod .. " + CTRL + h", hl.dsp.window.resize({ x = -20, y = 0, relative = true }))
+hl.bind(mainMod .. " + CTRL + l", hl.dsp.window.resize({ x = 20, y = 0 , relative = true }))
+hl.bind(mainMod .. " + CTRL + k", hl.dsp.window.resize({ x = 0, y = -20, relative = true }))
+hl.bind(mainMod .. " + CTRL + j", hl.dsp.window.resize({ x = 0, y = 20 , relative = true }))
 
 hl.bind(mainMod .. " + SHIFT + h", hl.dsp.window.swap({ direction = "left" }))
 hl.bind(mainMod .. " + SHIFT + l", hl.dsp.window.swap({ direction = "right" }))
