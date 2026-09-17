@@ -16,7 +16,7 @@ return
       "<LocalLeader>a",
       "<cmd>CodeCompanionChat Toggle<CR>",
       desc = "Toggle a chat buffer",
-      mode = { "n", "v" },
+      mode = { "n" },
     },
     {
       "<localleader>a",
@@ -27,6 +27,19 @@ return
   },
   config = function()
     require('codecompanion').setup({
+      interactions = {
+          cli = {
+            agent = "codex",
+            agents = {
+              codex = {
+                cmd = "codex",
+                args = {},
+                description = "OpenAI Codex CLI",
+                provider = "terminal",
+              },
+            },
+          },
+        },
     })
   end,
   }
