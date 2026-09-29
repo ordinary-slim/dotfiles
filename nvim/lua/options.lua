@@ -3,7 +3,6 @@ local vb = vim.bo
 local vw = vim.wo
 local vo = vim.opt
 
-vim.cmd([[colorscheme default]])
 vo.mouse = "a"
 vo.nu = true
 vo.rnu = true
@@ -28,3 +27,6 @@ vg.fortran_have_tabs = 1
 vg.tex_flavor= "tex" -- treat plaintex as tex
 
 vim.o.laststatus = 3
+
+-- thicker seps splits
+vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#FFFFFF", bold = true })

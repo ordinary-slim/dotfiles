@@ -8,16 +8,16 @@ local d = ls.dynamic_node
 local c = ls.choice_node
 
 ls.add_snippets("all", {
-	s(
-		"mysnip",
-		fmt([[
+  s(
+    "mysnip",
+    fmt([[
         s(
         "{}",
         {}
         ),
         ]], {
-		i(1, "Snippet name"),
+    i(1, "Snippet name"),
     i(2, 't("Basic snippet")'),
-		})
-	),
+    })
+  ),
 })

@@ -14,12 +14,8 @@ return {
       opts = {
         ui = {
           border = "single",
-          width = 0.9,
         },
       },
-      config = function()
-        require("mason").setup()
-      end,
     },
     "mason-org/mason-lspconfig.nvim", -- Bridges the gap in names of LSPs and Mason package names
     {
