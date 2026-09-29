@@ -6,8 +6,9 @@ keymap.set('n', '<Leader>q', ':qa<cr>')
 keymap.set('n', '<Leader>c', ':close<cr>')
 keymap.set('n', '<Leader>d', ':bp|bd #<cr>')
 keymap.set('n', '<Leader>r', ':e<cr>zz')
-keymap.set('n', '<Leader>w', ':lua common.ToggleQuickFixWindow()<cr>')
+keymap.set('n', '<Leader>W', ':lua common.ToggleQuickFixWindow()<cr>')
 keymap.set('n', '<Leader>tc', ':tabclose<cr>')
+-- copy filepath into clipboard
 keymap.set('n', '<Leader>y', ':let @+=expand("%:p")<cr>')
 -- <CTRL-]> (go to tag) is buggy in QWERTY keyboard. Spanish keyboard equivalent is <CTRL-5>
 -- See https://stackoverflow.com/questions/6932702/how-do-i-type-ctrl-on-a-qwertz-keyboard-in-order-to-jump-to-a-tag-with-vim
