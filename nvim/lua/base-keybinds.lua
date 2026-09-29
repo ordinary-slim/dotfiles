@@ -22,3 +22,21 @@ keymap.set('n', '<BS>', '<c-^>')
 -- navigate quickfix list
 keymap.set('n', ']q', ':cnext<cr>')
 keymap.set('n', '[q', ':cprev<cr>')
+
+-- lsp
+
+keymap.set('n', 'gD', function() vim.lsp.buf.declaration() end)
+keymap.set('n', 'gd', function() vim.lsp.buf.definition() end)
+keymap.set('n', 'K', function() vim.lsp.buf.hover() end)
+keymap.set('n', 'gi', function() vim.lsp.buf.implementation() end)
+keymap.set('n', '<C-,>', function() vim.lsp.buf.signature_help() end)
+keymap.set('n', 'gr', function() vim.lsp.buf.references() end)
+keymap.set('n', '<space>wd', function() vim.lsp.buf.add_workspace_folder() end)
+keymap.set('n', '<space>wr', function() vim.lsp.buf.remove_workspace_folder() end)
+keymap.set('n', '<space>wl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end)
+keymap.set('n', '<space>D', function() vim.lsp.buf.type_definition() end)
+keymap.set('n', '<space>rn', function() vim.lsp.buf.rename() end)
+keymap.set('n', '<space>ca', function() vim.lsp.buf.code_action() end)
+keymap.set('n', '<space>e', function() vim.diagnostic.open_float() end)
+keymap.set('n', '[d', function() vim.diagnostic.goto_prev() end)
+keymap.set('n', ']d', function() vim.diagnostic.goto_next() end)
