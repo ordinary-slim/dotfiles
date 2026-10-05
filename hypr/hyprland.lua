@@ -21,6 +21,7 @@ local alttab = "rofi -show window -show-icons -matching normal"
 local screenshot_region_clipboard = "hyprshot -m region --clipboard-only --freeze"
 local powermenu = "powermenu"
 local toggle_waybar = "killall -SIGUSR1 waybar"
+local dismiss_notification = "makoctl dismiss"
 
 -------------------
 ---- AUTOSTART ----
@@ -218,7 +219,7 @@ local closeWindowBind = hl.bind(mainMod .. " + Q", hl.dsp.window.close())
 -- hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
-hl.bind(mainMod .. " + C", hl.dsp.exec_cmd("makoctl dismiss"))
+hl.bind(mainMod .. " + C", hl.dsp.exec_cmd(dismiss_notification))
 hl.bind(mainMod .. " + D", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + T", hl.dsp.layout("togglesplit"))    -- dwindle only
@@ -253,12 +254,17 @@ hl.bind(mainMod .. " + SHIFT + l", hl.dsp.window.swap({ direction = "right" }))
 hl.bind(mainMod .. " + SHIFT + k", hl.dsp.window.swap({ direction = "up" }))
 hl.bind(mainMod .. " + SHIFT + j", hl.dsp.window.swap({ direction = "down" }))
 
+local utils = require("utils")
 -- Switch workspaces with mainMod + [0-9]
 -- Move active window to a workspace with mainMod + SHIFT + [0-9]
 for i = 1, 10 do
-    local key = i % 10 -- 10 maps to key 0
-    hl.bind(mainMod .. " + " .. key,             hl.dsp.focus({ workspace = i}))
-    hl.bind(mainMod .. " + SHIFT + " .. key,     hl.dsp.window.move({ workspace = i }))
+  local key = i % 10 -- 10 maps to key 0
+  hl.bind(mainMod .. " + " .. key,             hl.dsp.focus({ workspace = i}))
+  hl.bind(mainMod .. " + SHIFT + " .. key,     hl.dsp.window.move({ workspace = i }))
+  hl.bind(mainMod .. " + CTRL + SHIFT + " .. key,
+    function()
+      utils.remap_current_workspace(i)
+    end)
 end
 
 -- Example special workspace (scratchpad)
