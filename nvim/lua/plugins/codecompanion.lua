@@ -25,21 +25,22 @@ return
       mode = { "v" },
     },
   },
-  config = function()
-    require('codecompanion').setup({
-      interactions = {
-          cli = {
-            agent = "codex",
-            agents = {
-              codex = {
-                cmd = "codex",
-                args = {},
-                description = "OpenAI Codex CLI",
-                provider = "terminal",
-              },
-            },
+    config = function()
+      require("codecompanion").setup({
+        adapters = {
+          acp = {
+            codex = function()
+              return require("codecompanion.adapters").extend("codex", {
+                defaults = {
+                  auth_method = "chat-gpt", -- "api-key"|"chat-gpt"
+                },
+                -- env = {
+                --   OPENAI_API_KEY = "my-api-key",
+                -- },
+              })
+            end,
           },
         },
-    })
-  end,
+      })
+    end,
   }

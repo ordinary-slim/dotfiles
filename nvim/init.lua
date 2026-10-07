@@ -20,6 +20,7 @@ _G.common = require("common") -- define global variables and utility functions
 require('options') -- general settings
 require('extra-filetypes') -- extra syntax highlighting
 require('base-keybinds') -- non-plugin keybinds
+require('utils')
 
 require("lazy").setup({ import = "plugins" })
 
