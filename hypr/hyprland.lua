@@ -22,6 +22,7 @@ local screenshot_region_clipboard = "hyprshot -m region --clipboard-only --freez
 local powermenu = "powermenu"
 local toggle_waybar = "killall -SIGUSR1 waybar"
 local dismiss_notification = "makoctl dismiss"
+local wallpaper_script = "$HOME/.config/set-random-wallpaper.sh"
 
 -------------------
 ---- AUTOSTART ----
@@ -31,7 +32,7 @@ hl.on("hyprland.start", function ()
   hl.exec_cmd("hypridle")
   hl.exec_cmd("mako")
   hl.exec_cmd("hyprpaper")
-  hl.exec_cmd("$HOME/.config/set_random_wallpaper.sh")
+  hl.exec_cmd(wallpaper_script)
 end)
 
 -------------------------------
@@ -229,7 +230,7 @@ hl.bind(mainMod .. " + X", hl.dsp.exec_cmd("hyprsaver"))
 hl.bind(mainMod .. " + W", hl.dsp.exec_cmd(toggle_waybar)) -- toggle waybar
 hl.bind(mainMod .. " + Tab", hl.dsp.exec_cmd(alttab))
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ action = "toggle" }))
-hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd("$HOME/.config/set_random_wallpaper.sh"))
+hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd(wallpaper_script))
 hl.bind(mainMod .. " + PRINT", hl.dsp.exec_cmd(screenshot_region_clipboard))
 hl.bind(mainMod .. " + BACKSPACE", hl.dsp.exec_cmd(powermenu))
 

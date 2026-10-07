@@ -6,12 +6,16 @@ if [ ! -d "$directory" ]; then
     echo "Wallpaper directory does not exist: $directory" >&2
     exit 1
 fi
-
-mapfile -d '' -t images < <(find "$directory" -type f \( -iname '*.jpg' -o -iname '*.png' -o -iname '*.jpeg' -o -iname '*.webp' \) -print0)
-if [ "${#images[@]}" -eq 0 ]; then
-    echo "No images found in $directory" >&2
-    exit 1
-fi
+#
+# mapfile -d '' -t images < <(find "$directory" -type f \( -iname '*.jpg' -o -iname '*.png' -o -iname '*.jpeg' -o -iname '*.webp' \) -print0)
+# if [ "${#images[@]}" -eq 0 ]; then
+#     echo "No images found in $directory" >&2
+#     exit 1
+# fi
+#
+# random_index=$((RANDOM % ${#images[@]}))
+# random_wallpaper="${images[$random_index]}"
+random_wallpaper="${directory}/$(ls $directory |  shuf -n 1)"
 
 if ! monitor_output=$(hyprctl monitors); then
     echo "Failed to discover monitors" >&2
@@ -36,9 +40,6 @@ if [ "$ready" = false ]; then
 fi
 
 status=0
-
-random_index=$((RANDOM % ${#images[@]}))
-random_wallpaper="${images[$random_index]}"
 
 for monitor in "${monitors[@]}"; do
     if error=$(hyprctl hyprpaper wallpaper "$monitor,$random_wallpaper" 2>&1); then
