@@ -1,11 +1,18 @@
 return {
-  'christoomey/vim-tmux-navigator',
-  config = function()
-    -- Use ctrl-[hjkl] to select the active split!
-    vim.keymap.set('n', '<silent>', '<c-k> :wincmd k<CR>')
-    vim.keymap.set('n', '<silent>', '<c-j> :wincmd j<CR>')
-    vim.keymap.set('n', '<silent>', '<c-h> :wincmd h<CR>')
-    vim.keymap.set('n', '<silent>', '<c-l> :wincmd l<CR>')
-  end,
+  "christoomey/vim-tmux-navigator",
+  cmd = {
+    "TmuxNavigateLeft",
+    "TmuxNavigateDown",
+    "TmuxNavigateUp",
+    "TmuxNavigateRight",
+    "TmuxNavigatePrevious",
+    "TmuxNavigatorProcessList",
+  },
+  keys = {
+    { "<c-h>", "<cmd><C-U>TmuxNavigateLeft<cr>" },
+    { "<c-j>", "<cmd><C-U>TmuxNavigateDown<cr>" },
+    { "<c-k>", "<cmd><C-U>TmuxNavigateUp<cr>" },
+    { "<c-l>", "<cmd><C-U>TmuxNavigateRight<cr>" },
+    { "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
+  },
 }
-
