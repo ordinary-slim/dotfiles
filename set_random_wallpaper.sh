@@ -1,37 +1,52 @@
 #!/bin/bash
 
-pidof hyprpaper || hyprpaper &
-
-# Directory containing wallpapers
 directory="$HOME/wallpapers"
 
-monitors=$(hyprctl monitors | awk '/Monitor/{print $2}')
-
-# Check if directory exists and contains images
-if [ -d "$directory" ]; then
-    # Find all supported image files (case-insensitive)
-    mapfile -t images < <(find "$directory" -type f \( -iname '*.jpg' -o -iname '*.png' -o -iname '*.jpeg' -o -iname '*.webp' \))
-
-    # Ensure there is at least one image
-    if [ "${#images[@]}" -eq 0 ]; then
-        echo "No images found in $directory"
-        exit 1
-    fi
-
-    hyprctl hyprpaper unload all
-    monitor_index=0
-    for monitor in $monitors; do
-      ((monitor_index++))
-      # Better randomness: use $RANDOM with a nanosecond seed for variety
-      seed=$(date +%N)$monitor_index
-      # force base-10 for seed to avoid octal parsing
-      random_index=$(( (RANDOM * (10#$seed)) % ${#images[@]} ))
-      random_background="${images[$random_index]}"
-
-      # Apply wallpaper
-      hyprctl hyprpaper preload "$random_background"
-      hyprctl hyprpaper wallpaper $monitor, "$random_background"
-
-      echo "Set wallpaper: $random_background in monitor: $monitor"
-    done
+if [ ! -d "$directory" ]; then
+    echo "Wallpaper directory does not exist: $directory" >&2
+    exit 1
 fi
+
+mapfile -d '' -t images < <(find "$directory" -type f \( -iname '*.jpg' -o -iname '*.png' -o -iname '*.jpeg' -o -iname '*.webp' \) -print0)
+if [ "${#images[@]}" -eq 0 ]; then
+    echo "No images found in $directory" >&2
+    exit 1
+fi
+
+if ! monitor_output=$(hyprctl monitors); then
+    echo "Failed to discover monitors" >&2
+    exit 1
+fi
+mapfile -t monitors < <(awk '/^Monitor / {print $2}' <<< "$monitor_output")
+
+# Wait for the running daemon's IPC before applying any wallpapers.
+ready=false
+for ((attempt = 1; attempt <= 50; attempt++)); do
+    if error=$(hyprctl hyprpaper listactive 2>&1); then
+        ready=true
+        break
+    fi
+    if ((attempt < 50)); then
+        sleep 0.1
+    fi
+done
+if [ "$ready" = false ]; then
+    echo "Timed out waiting for hyprpaper readiness: $error" >&2
+    exit 1
+fi
+
+status=0
+
+random_index=$((RANDOM % ${#images[@]}))
+random_wallpaper="${images[$random_index]}"
+
+for monitor in "${monitors[@]}"; do
+    if error=$(hyprctl hyprpaper wallpaper "$monitor,$random_wallpaper" 2>&1); then
+        echo "Set wallpaper: $random_wallpaper in monitor: $monitor"
+    else
+        echo "Failed to set wallpaper on $monitor: $error" >&2
+        status=1
+    fi
+done
+
+exit "$status"

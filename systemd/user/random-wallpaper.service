@@ -1,0 +1,6 @@
+[Unit]
+Description="Set a random wallpaper"
+
+[Service]
+Type=oneshot
+ExecStart=/usr/sbin/bash %h/.config/set_random_wallpaper.sh

@@ -21,6 +21,9 @@ urls=(
 "https://runescape.wiki/images/Giant_Mole_wallpaper.jpg?4716f"
 "https://runescape.wiki/images/Barrows_Brothers_wallpaper.jpg?3c292"
 )
+wallpaperFolder=$HOME/wallpapers
+mkdir -p $wallpaperFolder
+pushd $wallpaperFolder
 for url in ${urls[@]}; do
   fname=$(basename $url)
   fname="${fname%%.jpg*}.jpg"
@@ -31,3 +34,4 @@ for url in ${urls[@]}; do
     --referer=${referer} \
     -O ${fname} "$url"
 done
+popd
