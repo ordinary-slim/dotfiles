@@ -32,14 +32,29 @@ return {
     local zk = require("zk")
     zk.setup(opts)
 
-    local function journal_entry()
-      zk.new({ dir = "journal/daily" })
+    local function journal_entry(date)
+      zk.new({ dir = "journal/daily", date = date })
     end
 
     for _, cname in ipairs({"ZkDaily", "ZkToday"}) do
-      vim.api.nvim_create_user_command(cname, journal_entry, {
-        desc = "Create or open today's journal note",
-      })
+      vim.api.nvim_create_user_command(cname, function()
+        journal_entry("today")
+      end, {
+          desc = "Create or open today's journal note",
+        })
     end
+    vim.api.nvim_create_user_command("ZkYesterday", function()
+      journal_entry("yesterday")
+    end, {
+        desc = "Create or open yesterday's journal note",
+      })
   end,
+  keys = {
+    {
+      "<LocalLeader>z",
+      "<cmd>ZkNotes<CR>",
+      desc = "ZkNotes",
+      mode = { "n" },
+    }
+  }
 }
