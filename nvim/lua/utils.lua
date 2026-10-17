@@ -3,7 +3,7 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   pattern = "body-weight.csv",
   callback = function(event)
     vim.keymap.set("n", "o", function()
-      return "o<C-u>" .. os.date("%Y-%m-%d") .. ", "
+      return "o" .. os.date("%Y-%m-%d") .. ", "
     end, {
         buffer = event.buf,
         expr = true,

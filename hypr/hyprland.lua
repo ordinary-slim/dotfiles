@@ -23,6 +23,7 @@ local powermenu = "powermenu"
 local toggle_waybar = "killall -SIGUSR1 waybar"
 local dismiss_notification = "makoctl dismiss"
 local wallpaper_script = "$HOME/.config/set-random-wallpaper.sh"
+local screensaver_utils = "$HOME/.config/screensaver.sh"
 
 -------------------
 ---- AUTOSTART ----
@@ -227,6 +228,7 @@ hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + T", hl.dsp.layout("togglesplit"))    -- dwindle only
 
 hl.bind(mainMod .. " + X", hl.dsp.exec_cmd("hyprsaver"))
+hl.bind(mainMod .. " + SHIFT + X", hl.dsp.exec_cmd(screensaver_utils .. " toggle_screensaver"))
 hl.bind(mainMod .. " + W", hl.dsp.exec_cmd(toggle_waybar)) -- toggle waybar
 hl.bind(mainMod .. " + Tab", hl.dsp.exec_cmd(alttab))
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ action = "toggle" }))
