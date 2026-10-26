@@ -14,6 +14,13 @@ keymap.set('n', '<Leader>tt', '<C-]>')
 -- copy filepath into clipboard
 keymap.set('n', '<Leader>y', ':let @+=expand("%:p")<cr>')
 
+keymap.set('n', '<A-e>', '<C-e>')
+keymap.set('n', '<A-y>', '<C-y>')
+keymap.set('n', '<A-d>', '<C-d>')
+keymap.set('n', '<A-u>', '<C-u>')
+keymap.set('n', '<A-f>', '<C-f>')
+keymap.set('n', '<A-b>', '<C-b>')
+
 -- navigate buffer list
 keymap.set('n', '<c-n>', ':bn<cr>')
 keymap.set('n', '<c-p>', ':bp<cr>')
