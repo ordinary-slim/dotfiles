@@ -24,6 +24,7 @@ local toggle_waybar = "killall -SIGUSR1 waybar"
 local dismiss_notification = "makoctl dismiss"
 local wallpaper_script = "$HOME/.config/set-random-wallpaper.sh"
 local screensaver_utils = "$HOME/.config/screensaver.sh"
+local record_region_clipboard = "$HOME/.config/record-region.sh"
 
 -------------------
 ---- AUTOSTART ----
@@ -234,6 +235,7 @@ hl.bind(mainMod .. " + Tab", hl.dsp.exec_cmd(alttab))
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ action = "toggle" }))
 hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd(wallpaper_script))
 hl.bind(mainMod .. " + PRINT", hl.dsp.exec_cmd(screenshot_region_clipboard))
+hl.bind(mainMod .. " + SHIFT + PRINT", hl.dsp.exec_cmd(record_region_clipboard))
 hl.bind(mainMod .. " + BACKSPACE", hl.dsp.exec_cmd(powermenu))
 
 
