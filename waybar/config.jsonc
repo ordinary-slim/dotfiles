@@ -94,8 +94,8 @@
     },
     "backlight": {
         // "device": "acpi_video1",
-        "format": "{percent}% {icon}",
-        "format-icons": ["🌑", "🌘", "🌗", "🌖", "🌕"]
+        "format": "{percent}% {icon} ",
+        "format-icons": ["", "", "", "", ""]
     },
     "include": [
       "./modules/clock.jsonc",
@@ -118,7 +118,7 @@
         "format-ethernet": "{ipaddr}/{cidr} ",
         "tooltip-format": "{ifname} via {gwaddr} ",
         "format-linked": "{ifname} (No IP) ",
-        "format-disconnected": "Disconnected ⚠",
+        "format-disconnected": "Disconnected 󰖪",
         "format-alt": "{ifname}: {ipaddr}/{cidr}"
     },
     "pulseaudio": {
@@ -146,7 +146,7 @@
       "format-paused": "{status_icon} <i>{dynamic}</i>",
       "player-icons": {
         "default": "▶",
-        "mpv": "🎵"
+        "mpv": "󰎆"
       },
       "status-icons": {
         "paused": "⏸"

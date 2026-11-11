@@ -30,6 +30,7 @@ local record_region_clipboard = "$HOME/.config/record-region.sh"
 ---- AUTOSTART ----
 -------------------
 hl.on("hyprland.start", function ()
+  hl.exec_cmd("udiskie") -- auto mounting
   hl.exec_cmd("waybar")
   hl.exec_cmd("hypridle")
   hl.exec_cmd("mako")

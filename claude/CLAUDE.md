@@ -1,3 +1,7 @@
+# Coding guidelines
+
+@~/.config/claude/karpathy.md
+
 # Commit messages
 
 - A short, dry subject to the point, then a blank line and a bullet list of what changed; each bullet at most 2 lines.
